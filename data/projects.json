@@ -1,0 +1,57 @@
+[
+  {
+    "id": "vr-weapon-system",
+    "title": "VR Weapon System",
+    "category": "VR · Unity Asset Store",
+    "tag": "Unity Asset",
+    "description": "Unity Asset для VR, в котором я собрал оружейную систему, модели, звуки и основные взаимодействия. Во время разработки я активно изучал паттерны проектирования, SOLID и структуру расширяемых игровых систем.",
+    "features": [
+      "Модели пистолета Sig P320 и винтовки M16A4",
+      "Система перезарядки со сменой магазина и взводом затвора",
+      "Выброс гильз, звуки оружия и базовая отдача",
+      "Архитектура для расширения набора оружия"
+    ],
+    "learnings": [
+      "Практическое применение ООП и SOLID",
+      "Паттерны проектирования в Unity",
+      "Разработка оружейных систем для VR"
+    ],
+    "technologies": ["Unity", "C#", "XR Toolkit", "Blender", "SOLID"],
+    "primaryActionLabel": "Открыть видео",
+    "primaryActionUrl": "#",
+    "secondaryActionLabel": "Asset Store",
+    "secondaryActionUrl": "#",
+    "image": "https://placehold.co/580x420/202020/e8833a?text=VR+Weapon+System",
+    "gallery": [
+      "https://placehold.co/104x72/333333/e8833a?text=1",
+      "https://placehold.co/104x72/333333/f5f5f5?text=2",
+      "https://placehold.co/104x72/333333/f5f5f5?text=3"
+    ],
+    "flipped": false
+  },
+  {
+    "id": "quest-island-vr",
+    "title": "Quest Island VR",
+    "category": "VR Game · Meta Quest · PCVR",
+    "tag": "VR Game",
+    "description": "VR-игра для Meta Quest и PCVR. Игрок оказывается на таинственном острове, решает головоломки и взаимодействует с виртуальной клавиатурой, карточками-ключами и другими предметами.",
+    "features": [
+      "Оригинальный мир с собственной атмосферой",
+      "Интерактивные головоломки и предметные механики",
+      "Авторская музыка и звуковое оформление",
+      "Поддержка Meta Quest и PCVR"
+    ],
+    "learnings": [],
+    "technologies": ["Unity", "Meta Quest", "PCVR", "XR Toolkit", "Original Music"],
+    "primaryActionLabel": "Открыть видео",
+    "primaryActionUrl": "#",
+    "secondaryActionLabel": "Подробнее",
+    "secondaryActionUrl": "#",
+    "image": "https://placehold.co/580x420/0a2a3a/06b6d4?text=Quest+Island+VR",
+    "gallery": [
+      "https://placehold.co/104x72/0a2a3a/06b6d4?text=1",
+      "https://placehold.co/104x72/0a3020/f5f5f5?text=2"
+    ],
+    "flipped": true
+  }
+]

@@ -1,0 +1,58 @@
+# Worklog
+
+## 2026-05-22
+
+- Created `WORKLOG.md` to record actions during portfolio infrastructure setup.
+- Listed the project root to inspect existing files.
+- Attempted to read git status and `egor_projects.html` in parallel; the Windows sandbox rejected two process starts, so these reads will be retried separately.
+- Retried `git status --short` with approval; Git reported `dubious ownership` for the repository, so no global Git config change was made.
+- Read `egor_projects.html` and found inline CSS, an injected Kaspersky script, placeholder project media, and mojibake text output that should be normalized for a deployable static site.
+- Chose a static-site infrastructure with `index.html`, separated CSS/JS assets, lightweight npm scripts, Netlify config, GitHub Pages workflow, and project documentation.
+- Created asset directories: `assets/css`, `assets/js`, `assets/img`, plus `.github/workflows` for deployment automation.
+- Added `index.html` as the deployable entry point and separated page styles/scripts into `assets/css/styles.css` and `assets/js/main.js`.
+- Added deployment and project infrastructure files: `package.json`, `netlify.toml`, `.github/workflows/pages.yml`, `.gitignore`, `.editorconfig`, `.nojekyll`, and `README.md`.
+- Verified the resulting file structure with a recursive file listing.
+- Ran `npm run build`; it completed successfully and confirmed that the static site does not need a build step.
+- Started evaluating whether React, Node.js, or another toolchain is needed for a project editor; initial decision is to prefer a static browser-based editor unless persistence requirements force a server.
+- Read the current `index.html`, `assets/css/styles.css`, `assets/js/main.js`, and project file tree before implementing the editor.
+- Decided not to introduce React or a Node.js framework yet because the requested editor can be implemented with static HTML, CSS, JavaScript, browser storage, JSON import/export, and image uploads as data URLs.
+- Planned the editor implementation: move project content into `data/projects.json`, render project cards from JSON, add `editor.html`, add editor styles/scripts, and add a bash server script for local preview.
+- Added `data/projects.json` with the initial two project records, including text fields, features, learnings, technologies, actions, cover images, gallery images, and layout flags.
+- Replaced the hardcoded project cards in `index.html` with a data-driven project container and added a navigation link to the editor page.
+- Rewrote `assets/js/main.js` to load project data from local storage first, fall back to `data/projects.json`, render cards from DOM nodes, and support clickable gallery thumbnails.
+- Added `editor.html`, `assets/js/editor.js`, and `start-server.sh` for browser-based project editing, image uploads, local draft storage, JSON import/export, and local static serving.
+- Reviewed the editor preview implementation and identified that user-entered text should be escaped before being inserted into preview HTML.
+- Added editor styles to `assets/css/styles.css`, including sidebar, form controls, project list, preview, import button, and responsive layout.
+- Updated `assets/js/editor.js` to escape user-entered preview content before inserting it into HTML.
+- Added `dev:bash` to `package.json` and documented the editor workflow plus bash server startup in `README.md`.
+- Validated `data/projects.json` with Node.js JSON parsing; the file is valid.
+- Ran `npm run build`; the static-site build check completed successfully.
+- Listed the project files again to confirm the editor, data file, server script, and updated assets are present.
+- Started a local Python static server in the background on port `4173` for HTTP testing of `index.html`, `editor.html`, and `data/projects.json`.
+- Tried to verify `index.html`, `editor.html`, and `data/projects.json` over HTTP; requests failed because the first background server process was no longer reachable.
+- Checked for the Python executable and confirmed Python is installed at `C:\Users\Егор\AppData\Local\Programs\Python\Python313\python.exe`.
+- Ran `python -m http.server 4173 --bind 127.0.0.1` in the foreground with a short timeout; it stayed running until the timeout, confirming the server command itself is valid.
+- Started the local HTTP server outside the sandbox on `127.0.0.1:4173` because sandboxed background processes were not staying alive.
+- Verified `http://127.0.0.1:4173/index.html`, `http://127.0.0.1:4173/editor.html`, and `http://127.0.0.1:4173/data/projects.json`; all returned HTTP 200.
+- Removed temporary `server.out.log` and `server.err.log` files created during server startup troubleshooting.
+- Ran `node --check` for `assets/js/main.js` and `assets/js/editor.js`; both JavaScript files passed syntax validation.
+- Listed project files after cleanup to confirm no temporary server log files remain.
+- Received feedback that double-clicking `start-server.sh` opens the server terminal but does not open the site in a browser.
+- Updated `start-server.sh` to open `http://localhost:4173/editor.html` automatically before starting the Python static server.
+- Updated `README.md` to explain that the terminal window must stay open while the local server is running.
+- Tried to syntax-check `start-server.sh` with `bash -n`, but `bash` is not available in the PowerShell PATH used by this session.
+- Adjusted `start-server.sh` to open the browser through `powershell.exe` first, then `cmd.exe` as fallback, and to delay browser opening by one second so the server has time to start.
+- Found Git Bash at `C:\Program Files\Git\bin\bash.exe` and successfully ran `bash -n ./start-server.sh`; the script passed syntax validation.
+- Started integrating the newly added `egor_main.html` layout as the portfolio homepage.
+- Read `egor_main.html`, current `index.html`, shared stylesheet, and the project file tree before integration.
+- Found that `egor_main.html` contains inline CSS, an injected Kaspersky script, and mojibake text, so the homepage will be rebuilt cleanly inside the existing shared static-site structure.
+- Created `projects.html` from the previous data-driven projects page so the project editor and JSON rendering continue to work after `index.html` becomes the homepage.
+- Recreated `index.html` as the clean homepage based on `egor_main.html`, with shared navigation, hero, stats, about, education, timeline, game inspiration, and CTA sections.
+- Added homepage styles from the new layout to `assets/css/styles.css`, adapted to the existing shared variables, navigation, footer, project cards, and editor styles.
+- Added responsive homepage rules for hero, stats, sections, education grid, game grid, and CTA banner.
+- Updated `editor.html` navigation and preview links to point to `projects.html` now that `index.html` is the homepage.
+- Updated `README.md` to document the new `projects.html` page.
+- Ran `node --check` for `assets/js/main.js` and `assets/js/editor.js`; both passed syntax validation after homepage integration.
+- Validated `data/projects.json` again with Node.js JSON parsing; the file is still valid.
+- Ran `npm run build`; the static build check completed successfully.
+- Verified over the local HTTP server that `index.html`, `projects.html`, and `editor.html` all return HTTP 200.

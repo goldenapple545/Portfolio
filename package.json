@@ -1,0 +1,19 @@
+{
+  "name": "egor-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static portfolio site for Egor Vikturov.",
+  "scripts": {
+    "dev": "python -m http.server 4173",
+    "dev:bash": "bash ./start-server.sh",
+    "build": "node -e \"console.log('Static site: no build step required')\"",
+    "preview": "python -m http.server 4173"
+  },
+  "keywords": [
+    "portfolio",
+    "static-site",
+    "github-pages",
+    "netlify"
+  ],
+  "license": "UNLICENSED"
+}

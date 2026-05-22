@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Проекты Егора Виктурова: VR-разработка, игровые проекты, Unity и интерактивные системы."
+    />
+    <meta name="theme-color" content="#e8833a" />
+    <title>Egor Vikturov - Projects</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <script src="./assets/js/main.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Основная навигация">
+        <ul class="nav-links">
+          <li><a href="./index.html">Главная</a></li>
+          <li><a href="./projects.html" class="active" aria-current="page">Проекты</a></li>
+          <li><a href="./index.html#music">Музыка</a></li>
+          <li><a href="./editor.html">Редактор</a></li>
+        </ul>
+
+        <a class="nav-logo" href="./index.html" aria-label="Egor Vikturov">
+          <span class="nav-logo-placeholder">EV</span>
+        </a>
+
+        <div class="nav-right">
+          <a href="mailto:hello@example.com" class="btn-nav">Контакты</a>
+          <div class="lang-switch" aria-label="Переключение языка">
+            <button class="active" type="button">RU</button>
+            <button type="button">EN</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-header" aria-labelledby="projects-title">
+        <p class="eyebrow">VR Developer & Game Designer</p>
+        <h1 id="projects-title">Мои проекты</h1>
+        <div class="underline" aria-hidden="true"></div>
+      </section>
+
+      <section
+        class="projects-list"
+        id="projects"
+        aria-label="Список проектов"
+        data-projects-root
+      >
+        <p class="empty-state">Загрузка проектов...</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Egor Vikturov · VR Developer & Game Designer</p>
+    </footer>
+  </body>
+</html>
