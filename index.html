@@ -6,9 +6,10 @@
     <meta
       name="description"
       content="Портфолио Егора Виктурова: VR Developer, Game Designer, Unity и XR Interaction Toolkit."
+      data-i18n-attrs="content:metaDescription"
     />
     <meta name="theme-color" content="#e8833a" />
-    <title>Egor Vikturov - VR Developer</title>
+    <title data-i18n="pageTitle">Egor Vikturov - VR Developer</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,12 +21,12 @@
   </head>
   <body>
     <header class="site-header">
-      <nav class="nav" aria-label="Основная навигация">
+      <nav class="nav" aria-label="Основная навигация" data-i18n-attrs="aria-label:navAria">
         <ul class="nav-links">
-          <li><a href="./index.html" class="active" aria-current="page">Главная</a></li>
-          <li><a href="./projects.html">Проекты</a></li>
-          <li><a href="./music.html">Музыка</a></li>
-          <li><a href="./editor.html">Редактор</a></li>
+          <li><a href="./index.html" class="active" aria-current="page" data-i18n="navHome">Главная</a></li>
+          <li><a href="./projects.html" data-i18n="navProjects">Проекты</a></li>
+          <li><a href="./music.html" data-i18n="navMusic">Музыка</a></li>
+          <li><a href="./editor.html" data-i18n="navEditor">Редактор</a></li>
         </ul>
 
         <a class="nav-logo" href="./index.html" aria-label="Egor Vikturov">
@@ -33,10 +34,10 @@
         </a>
 
         <div class="nav-right">
-          <a href="mailto:hello@example.com" class="btn-nav">Контакты</a>
-          <div class="lang-switch" aria-label="Переключение языка">
-            <button class="active" type="button">RU</button>
-            <button type="button">EN</button>
+          <a href="mailto:hello@example.com" class="btn-nav" data-i18n="navContacts">Контакты</a>
+          <div class="lang-switch" aria-label="Переключение языка" data-i18n-attrs="aria-label:langSwitchAria">
+            <button class="active" type="button" data-lang="ru">RU</button>
+            <button type="button" data-lang="en">EN</button>
           </div>
         </div>
       </nav>
@@ -45,18 +46,18 @@
     <main>
       <section class="hero" id="home">
         <div class="hero-text">
-          <div class="hero-eyebrow">Открыт к предложениям</div>
+          <div class="hero-eyebrow" data-i18n="heroEyebrow">Открыт к предложениям</div>
           <h1>
             Egor Vikturov
-            <span>VR Developer & Game Designer</span>
+            <span data-i18n="heroRole">VR Developer & Game Designer</span>
           </h1>
-          <p class="hero-sub">
+          <p class="hero-sub" data-i18n="heroSub">
             Создаю иммерсивные VR-игры и интерактивные миры с 2020 года.
             Убежден, что погружение - это основа хорошей игры.
           </p>
           <div class="hero-btns">
-            <a href="./projects.html" class="btn-white">Посмотреть проекты</a>
-            <a href="#" class="btn-ghost">Скачать CV</a>
+            <a href="./projects.html" class="btn-white" data-i18n="heroProjects">Посмотреть проекты</a>
+            <a href="#" class="btn-ghost" data-i18n="heroCv">Скачать CV</a>
           </div>
         </div>
 
@@ -74,75 +75,74 @@
         </div>
       </section>
 
-      <section class="stats-bar" aria-label="Ключевые факты">
+      <section class="stats-bar" aria-label="Ключевые факты" data-i18n-attrs="aria-label:statsAria">
         <div class="stat">
           <div class="stat-num">5+</div>
-          <div class="stat-label">Лет в программировании</div>
+          <div class="stat-label" data-i18n="statProgramming">Лет в программировании</div>
         </div>
         <div class="stat">
           <div class="stat-num">4+</div>
-          <div class="stat-label">Сертификата Unity</div>
+          <div class="stat-label" data-i18n="statCertificates">Сертификата Unity</div>
         </div>
         <div class="stat">
           <div class="stat-num">2</div>
-          <div class="stat-label">VR-проекта</div>
+          <div class="stat-label" data-i18n="statProjects">VR-проекта</div>
         </div>
         <div class="stat">
           <div class="stat-num">∞</div>
-          <div class="stat-label">Идей</div>
+          <div class="stat-label" data-i18n="statIdeas">Идей</div>
         </div>
       </section>
 
       <section class="section" id="about">
         <div class="section-head">
-          <span class="section-label">// обо мне</span>
-          <h2 class="section-title">О себе</h2>
+          <span class="section-label" data-i18n="aboutLabel">// обо мне</span>
+          <h2 class="section-title" data-i18n="aboutTitle">О себе</h2>
           <div class="section-line"></div>
         </div>
 
         <div class="about-grid">
           <div class="about-text">
-            <p>
+            <p data-i18n="aboutTextOne">
               Я VR-разработчик: программирую с 2020 года, занимаюсь геймдевом
               с 2022-го. Ответственный, пунктуальный, довожу задачи до результата
               и быстро нахожу общий язык с людьми.
             </p>
-            <p>
+            <p data-i18n="aboutTextTwo">
               Убежден, что погружение - это основа хорошей игры. Помимо кода я
               пишу оригинальную музыку для своих проектов и постоянно
               экспериментирую в процессе разработки.
-            </p>
-            <p>
-              Лучший способ расти для меня - создавать вещи, которые находятся
-              чуть выше текущего уровня и требуют разобраться глубже.
             </p>
           </div>
 
           <div>
             <div class="skill-group">
-              <div class="skill-group-label">Технологии</div>
+              <div class="skill-group-label" data-i18n="skillsTech">Технологии</div>
               <div class="skill-tags">
                 <span class="tag">Unity</span>
                 <span class="tag">XR Interaction Toolkit</span>
                 <span class="tag">C#</span>
                 <span class="tag">Blender</span>
                 <span class="tag">Git</span>
+                <span class="tag">Fishnet</span>
+                <span class="tag">Zenject</span>
+                <span class="tag">UniTask</span>
               </div>
             </div>
             <div class="skill-group">
-              <div class="skill-group-label">Языки</div>
+              <div class="skill-group-label" data-i18n="skillsLanguages">Языки</div>
               <div class="skill-tags">
                 <span class="tag soft">English</span>
-                <span class="tag soft">Русский</span>
+                <span class="tag soft" data-i18n="langRussian">Русский</span>
               </div>
             </div>
             <div class="skill-group">
-              <div class="skill-group-label">Интересы</div>
+              <div class="skill-group-label" data-i18n="skillsInterests">Интересы</div>
               <div class="skill-tags">
                 <span class="tag soft">VR/AR</span>
                 <span class="tag soft">Game Design</span>
-                <span class="tag soft">Музыка</span>
-                <span class="tag soft">ООП & Паттерны</span>
+                <span class="tag soft" data-i18n="interestMusic">Музыка</span>
+                <span class="tag soft" data-i18n="interestDesign">Проектирование</span>
               </div>
             </div>
           </div>
@@ -153,8 +153,8 @@
 
       <section class="section" id="education">
         <div class="section-head">
-          <span class="section-label">// образование</span>
-          <h2 class="section-title">Образование</h2>
+          <span class="section-label" data-i18n="educationLabel">// образование</span>
+          <h2 class="section-title" data-i18n="educationTitle">Образование</h2>
           <div class="section-line"></div>
         </div>
 
@@ -163,11 +163,11 @@
             <div class="edu-card-top">
               <div class="edu-icon">MIET</div>
               <div>
-                <h3 class="edu-name">МИЭТ - инженер-автоматчик</h3>
-                <p class="edu-meta">2021-2025 · Зеленоград</p>
+                <h3 class="edu-name" data-i18n="mietTitle">МИЭТ - инженер-автоматизатор</h3>
+                <p class="edu-meta" data-i18n="mietMeta">2021-2025 · Зеленоград</p>
               </div>
             </div>
-            <span class="edu-pill">Диплом</span>
+            <span class="edu-pill" data-i18n="eduDiploma">Диплом</span>
           </article>
 
           <article class="edu-card">
@@ -178,7 +178,7 @@
                 <p class="edu-meta">Unity Technologies</p>
               </div>
             </div>
-            <span class="edu-pill">Сертификат</span>
+            <span class="edu-pill" data-i18n="eduCertificate">Сертификат</span>
           </article>
 
           <article class="edu-card">
@@ -189,7 +189,7 @@
                 <p class="edu-meta">Unity Technologies</p>
               </div>
             </div>
-            <span class="edu-pill">Сертификат</span>
+            <span class="edu-pill" data-i18n="eduCertificate">Сертификат</span>
           </article>
 
           <article class="edu-card">
@@ -200,7 +200,7 @@
                 <p class="edu-meta">Unity Technologies</p>
               </div>
             </div>
-            <span class="edu-pill">Сертификат</span>
+            <span class="edu-pill" data-i18n="eduCertificate">Сертификат</span>
           </article>
 
           <article class="edu-card edu-card-wide">
@@ -209,11 +209,11 @@
               <div>
                 <h3 class="edu-name">Unity Junior Programmer</h3>
                 <p class="edu-meta">
-                  Unity Technologies · Базовый курс по программированию в движке
+                  <span data-i18n="juniorProgrammerMeta">Unity Technologies · Базовый курс по программированию в движке</span>
                 </p>
               </div>
             </div>
-            <span class="edu-pill">Сертификат</span>
+            <span class="edu-pill" data-i18n="eduCertificate">Сертификат</span>
           </article>
         </div>
       </section>
@@ -222,38 +222,36 @@
 
       <section class="section">
         <div class="section-head">
-          <span class="section-label">// путь</span>
-          <h2 class="section-title">Как я развивался</h2>
+          <span class="section-label" data-i18n="timelineLabel">// путь</span>
+          <h2 class="section-title" data-i18n="timelineTitle">Как я развивался</h2>
           <div class="section-line"></div>
         </div>
 
         <div class="timeline">
           <article class="timeline-item">
             <div class="timeline-dot"></div>
-            <p class="timeline-year">2020</p>
-            <h3 class="timeline-title">Начало пути</h3>
-            <p class="timeline-desc">
-              Написал первые строки кода, освоил основы C# и Unity. Понял, что
-              хочу делать игры.
+            <p class="timeline-year">2019</p>
+            <h3 class="timeline-title" data-i18n="timelineStartTitle">Начало пути</h3>
+            <p class="timeline-desc" data-i18n="timelineStartDesc">
+              Написал первые строки кода, освоил основы C++.
             </p>
           </article>
 
           <article class="timeline-item">
             <div class="timeline-dot"></div>
             <p class="timeline-year">2021</p>
-            <h3 class="timeline-title">МИЭТ + Unity Junior Programmer</h3>
-            <p class="timeline-desc">
-              Поступил в МИЭТ и параллельно прошел первый официальный курс Unity.
+            <h3 class="timeline-title" data-i18n="timelineMietTitle">МИЭТ + Unity Junior Programmer</h3>
+            <p class="timeline-desc" data-i18n="timelineMietDesc">
+              Я начал с разработки модов для Bonelab и понял что хочу заниматься разработкой игр.
             </p>
           </article>
 
           <article class="timeline-item">
             <div class="timeline-dot"></div>
             <p class="timeline-year">2022</p>
-            <h3 class="timeline-title">Первые VR-проекты</h3>
-            <p class="timeline-desc">
-              Погрузился в VR-разработку, изучил XR Interaction Toolkit и начал
-              создавать иммерсивные окружения.
+            <h3 class="timeline-title" data-i18n="timelineVrTitle">Первые VR-проекты</h3>
+            <p class="timeline-desc" data-i18n="timelineVrDesc">
+              Погрузился в VR-разработку, изучил XR Interaction Toolkit, параллельно изучая С#.
             </p>
           </article>
 
@@ -261,17 +259,16 @@
             <div class="timeline-dot"></div>
             <p class="timeline-year">2023-2024</p>
             <h3 class="timeline-title">VR Weapon System & Quest Island</h3>
-            <p class="timeline-desc">
-              Разработал VR Weapon System Asset и завершил Quest Island VR для
-              Meta Quest и PCVR с оригинальной музыкой.
+            <p class="timeline-desc" data-i18n="timelineWorkDesc">
+              Делал пет-проекты, получил первую работу в компании.
             </p>
           </article>
 
           <article class="timeline-item">
             <div class="timeline-dot"></div>
-            <p class="timeline-year">2025</p>
-            <h3 class="timeline-title">Выпуск из МИЭТ · Новые горизонты</h3>
-            <p class="timeline-desc">
+            <p class="timeline-year" data-i18n="timelineNowYear">2025 - Сейчас</p>
+            <h3 class="timeline-title" data-i18n="timelineNowTitle">Выпуск из МИЭТ · Новые горизонты</h3>
+            <p class="timeline-desc" data-i18n="timelineNowDesc">
               Окончил университет и продолжаю развиваться в VR/Game Dev. Открыт
               к коммерческим проектам и сотрудничеству.
             </p>
@@ -283,8 +280,8 @@
 
       <section class="section" id="music">
         <div class="section-head">
-          <span class="section-label">// вдохновение</span>
-          <h2 class="section-title">Игровой опыт</h2>
+          <span class="section-label" data-i18n="gamesLabel">// вдохновение</span>
+          <h2 class="section-title" data-i18n="gamesTitle">Игровой опыт</h2>
           <div class="section-line"></div>
         </div>
 
@@ -297,24 +294,27 @@
           <div class="game-chip"><span class="game-chip-icon">BNG</span>BeamNG.Drive</div>
           <div class="game-chip"><span class="game-chip-icon">MD</span>Medieval Dynasty VR</div>
           <div class="game-chip"><span class="game-chip-icon">SH</span>SuperHot VR</div>
-          <div class="game-chip"><span class="game-chip-icon">AVR</span>Accounting VR</div>
+          <div class="game-chip"><span class="game-chip-icon">BB</span>Bonelab VR</div>
+          <div class="game-chip"><span class="game-chip-icon">H3VR</span>HotDogs, Horseshoes & Handgrenades</div>
+          <div class="game-chip"><span class="game-chip-icon">RM</span>Red Matter VR</div>
         </div>
       </section>
 
       <section class="cta-banner">
         <div class="cta-text">
-          <h2>Готов к новым проектам</h2>
-          <p>
+          <h2 data-i18n="ctaTitle">Готов к новым проектам</h2>
+          <p data-i18n="ctaText">
             Ищу интересные VR/gamedev задачи: Asset Store, инди-игра или
             корпоративный VR-тренажер. Напишите мне.
           </p>
         </div>
-        <a href="mailto:hello@example.com" class="btn-cta">Написать</a>
+        <a href="mailto:hello@example.com" class="btn-cta" data-i18n="ctaButton">Написать</a>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>© 2026 Egor Vikturov · VR Developer & Game Designer</p>
+      <p data-i18n="footer">© 2026 Egor Vikturov · VR Developer & Game Designer</p>
     </footer>
+    <script src="./assets/js/i18n.js"></script>
   </body>
 </html>

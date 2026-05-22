@@ -11,6 +11,10 @@ const galleryInput = document.querySelector("[data-gallery-files]");
 let projects = [];
 let selectedId = "";
 
+function t(key) {
+  return window.egorI18n?.getTranslation?.(key) || key;
+}
+
 function slugify(value) {
   return (
     value
@@ -63,16 +67,16 @@ function getSelectedProject() {
 function createProject() {
   return {
     id: `new-project-${Date.now()}`,
-    title: "Новый проект",
+    title: t("newProjectTitle"),
     category: "",
     tag: "",
     description: "",
     features: [],
     learnings: [],
     technologies: [],
-    primaryActionLabel: "Открыть",
+    primaryActionLabel: t("openButton"),
     primaryActionUrl: "#",
-    secondaryActionLabel: "Подробнее",
+    secondaryActionLabel: t("learnMoreButton"),
     secondaryActionUrl: "#",
     image: "",
     gallery: [],
@@ -128,7 +132,7 @@ function renderList() {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `project-list-item ${project.id === selectedId ? "active" : ""}`.trim();
-    button.innerHTML = `<span>${index + 1}. ${project.title || "Без названия"}</span><small>${project.category || "Без категории"}</small>`;
+    button.innerHTML = `<span>${index + 1}. ${project.title || t("untitledProject")}</span><small>${project.category || t("uncategorizedProject")}</small>`;
     button.addEventListener("click", () => {
       selectedId = project.id;
       fillForm(project);
@@ -151,7 +155,7 @@ function createProjectCard(project, index) {
     <div class="project-info">
       <div>
         <p class="project-category">${escapeHtml(project.category || "")}</p>
-        <h2 class="project-title">${escapeHtml(project.title || "Без названия")}</h2>
+        <h2 class="project-title">${escapeHtml(project.title || t("untitledProject"))}</h2>
         <p class="project-desc">${escapeHtml(project.description || "")}</p>
         ${
           project.features?.length
@@ -160,7 +164,7 @@ function createProjectCard(project, index) {
         }
         ${
           project.learnings?.length
-            ? `<div class="learnings"><p class="learnings-title">Что я усвоил</p><ul>${project.learnings
+            ? `<div class="learnings"><p class="learnings-title">${escapeHtml(t("projectLearnings"))}</p><ul>${project.learnings
                 .map((item) => `<li>${escapeHtml(item)}</li>`)
                 .join("")}</ul></div>`
             : ""
@@ -337,6 +341,11 @@ loadInitialProjects().catch((error) => {
   console.error(error);
   projects = [];
   selectedId = "";
+  renderList();
+  renderPreview();
+});
+
+window.addEventListener("languagechange", () => {
   renderList();
   renderPreview();
 });

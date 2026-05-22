@@ -4,6 +4,14 @@ const projectsRoot = document.querySelector("[data-projects-root]");
 const defaultImage =
   "https://placehold.co/580x420/202020/e8833a?text=Project+Cover";
 
+function getLanguage() {
+  return window.egorI18n?.getLanguage?.() || "ru";
+}
+
+function t(key) {
+  return window.egorI18n?.getTranslation?.(key) || key;
+}
+
 function createElement(tag, options = {}) {
   const element = document.createElement(tag);
 
@@ -34,29 +42,37 @@ function normalizeList(value) {
   return [];
 }
 
+function getLocalizedProject(project) {
+  const language = getLanguage();
+  const localized = project?.i18n?.[language];
+
+  return localized ? { ...project, ...localized } : project;
+}
+
 function createProjectCard(project, index) {
+  const localizedProject = getLocalizedProject(project);
   const article = createElement("article", {
-    className: `project-card ${project.flipped || index % 2 === 1 ? "flip" : ""}`.trim(),
+    className: `project-card ${localizedProject.flipped || index % 2 === 1 ? "flip" : ""}`.trim(),
   });
 
   const media = createElement("div", { className: "project-media" });
   const cover = createElement("img", {
     attributes: {
       src: project.image || defaultImage,
-      alt: `Обложка проекта ${project.title || "Project"}`,
+      alt: `${t("projectCoverAlt")} ${localizedProject.title || "Project"}`,
     },
   });
   media.append(cover);
 
-  if (project.tag) {
-    media.append(createElement("span", { className: "media-tag", text: project.tag }));
+  if (localizedProject.tag) {
+    media.append(createElement("span", { className: "media-tag", text: localizedProject.tag }));
   }
 
   const gallery = normalizeList(project.gallery);
   if (gallery.length > 0) {
     const overlay = createElement("div", {
       className: "media-overlay",
-      attributes: { "aria-label": "Превью проекта" },
+      attributes: { "aria-label": t("projectPreviewAria") },
     });
 
     gallery.forEach((src, thumbIndex) => {
@@ -64,7 +80,7 @@ function createProjectCard(project, index) {
         className: `thumb ${thumbIndex === 0 ? "active" : ""}`.trim(),
         attributes: {
           type: "button",
-          "aria-label": `Превью ${thumbIndex + 1}`,
+          "aria-label": `${t("projectPreview")} ${thumbIndex + 1}`,
         },
       });
       const image = createElement("img", { attributes: { src, alt: "" } });
@@ -83,32 +99,32 @@ function createProjectCard(project, index) {
   const info = createElement("div", { className: "project-info" });
   const content = createElement("div");
 
-  content.append(createElement("p", { className: "project-category", text: project.category }));
-  content.append(createElement("h2", { className: "project-title", text: project.title }));
-  content.append(createElement("p", { className: "project-desc", text: project.description }));
+  content.append(createElement("p", { className: "project-category", text: localizedProject.category }));
+  content.append(createElement("h2", { className: "project-title", text: localizedProject.title }));
+  content.append(createElement("p", { className: "project-desc", text: localizedProject.description }));
 
-  const features = normalizeList(project.features);
+  const features = normalizeList(localizedProject.features);
   if (features.length > 0) {
     const list = createElement("ul", { className: "feature-list" });
     features.forEach((feature) => list.append(createElement("li", { text: feature })));
     content.append(list);
   }
 
-  const learnings = normalizeList(project.learnings);
+  const learnings = normalizeList(localizedProject.learnings);
   if (learnings.length > 0) {
     const learningsBox = createElement("div", { className: "learnings" });
-    learningsBox.append(createElement("p", { className: "learnings-title", text: "Что я усвоил" }));
+    learningsBox.append(createElement("p", { className: "learnings-title", text: t("projectLearnings") }));
     const list = createElement("ul");
     learnings.forEach((learning) => list.append(createElement("li", { text: learning })));
     learningsBox.append(list);
     content.append(learningsBox);
   }
 
-  const technologies = normalizeList(project.technologies);
+  const technologies = normalizeList(localizedProject.technologies);
   if (technologies.length > 0) {
     const tags = createElement("div", {
       className: "tags",
-      attributes: { "aria-label": "Технологии" },
+      attributes: { "aria-label": t("projectTechnologiesAria") },
     });
     technologies.forEach((technology) => {
       tags.append(createElement("span", { className: "tag", text: technology }));
@@ -117,21 +133,21 @@ function createProjectCard(project, index) {
   }
 
   const actions = createElement("div", { className: "project-actions" });
-  if (project.primaryActionLabel) {
+  if (localizedProject.primaryActionLabel) {
     actions.append(
       createElement("a", {
         className: "btn-primary",
-        text: project.primaryActionLabel,
-        attributes: { href: project.primaryActionUrl || "#" },
+        text: localizedProject.primaryActionLabel,
+        attributes: { href: localizedProject.primaryActionUrl || "#" },
       }),
     );
   }
-  if (project.secondaryActionLabel) {
+  if (localizedProject.secondaryActionLabel) {
     actions.append(
       createElement("a", {
         className: "btn-outline",
-        text: project.secondaryActionLabel,
-        attributes: { href: project.secondaryActionUrl || "#" },
+        text: localizedProject.secondaryActionLabel,
+        attributes: { href: localizedProject.secondaryActionUrl || "#" },
       }),
     );
   }
@@ -150,7 +166,7 @@ function renderProjects(projects) {
   projectsRoot.innerHTML = "";
 
   if (!Array.isArray(projects) || projects.length === 0) {
-    projectsRoot.append(createElement("p", { className: "empty-state", text: "Проекты пока не добавлены." }));
+    projectsRoot.append(createElement("p", { className: "empty-state", text: t("projectsEmpty") }));
     return;
   }
 
@@ -180,16 +196,25 @@ async function loadProjects() {
 }
 
 if (projectsRoot) {
+  let loadedProjects = [];
+
   loadProjects()
-    .then(renderProjects)
+    .then((projects) => {
+      loadedProjects = projects;
+      renderProjects(loadedProjects);
+    })
     .catch((error) => {
       console.error(error);
       projectsRoot.innerHTML = "";
       projectsRoot.append(
         createElement("p", {
           className: "empty-state",
-          text: "Не удалось загрузить проекты. Запустите локальный сервер или проверьте data/projects.json.",
+          text: t("projectsLoadError"),
         }),
       );
     });
+
+  window.addEventListener("languagechange", () => {
+    renderProjects(loadedProjects);
+  });
 }

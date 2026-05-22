@@ -27,7 +27,24 @@
       "https://placehold.co/104x72/333333/f5f5f5?text=2",
       "https://placehold.co/104x72/333333/f5f5f5?text=3"
     ],
-    "flipped": false
+    "flipped": false,
+    "i18n": {
+      "en": {
+        "description": "A Unity asset for VR where I built a weapon system, models, sounds, and core interactions. During development, I actively studied design patterns, SOLID, and the structure of expandable game systems.",
+        "features": [
+          "Sig P320 pistol and M16A4 rifle models",
+          "Reloading system with magazine change and bolt charging",
+          "Shell ejection, weapon sounds, and basic recoil",
+          "Architecture for expanding the weapon set"
+        ],
+        "learnings": [
+          "Practical use of OOP and SOLID",
+          "Design patterns in Unity",
+          "VR weapon system development"
+        ],
+        "primaryActionLabel": "Open Video"
+      }
+    }
   },
   {
     "id": "quest-island-vr",
@@ -52,6 +69,19 @@
       "https://placehold.co/104x72/0a2a3a/06b6d4?text=1",
       "https://placehold.co/104x72/0a3020/f5f5f5?text=2"
     ],
-    "flipped": true
+    "flipped": true,
+    "i18n": {
+      "en": {
+        "description": "A VR game for Meta Quest and PCVR. The player finds themselves on a mysterious island, solves puzzles, and interacts with a virtual keyboard, key cards, and other objects.",
+        "features": [
+          "Original world with its own atmosphere",
+          "Interactive puzzles and object-based mechanics",
+          "Original music and sound design",
+          "Support for Meta Quest and PCVR"
+        ],
+        "primaryActionLabel": "Open Video",
+        "secondaryActionLabel": "Learn More"
+      }
+    }
   }
 ]

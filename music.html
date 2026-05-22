@@ -6,9 +6,10 @@
     <meta
       name="description"
       content="Музыка Егора Виктурова: саундтреки для VR-игр, гитарные записи, плейлисты и видео."
+      data-i18n-attrs="content:musicMetaDescription"
     />
     <meta name="theme-color" content="#e8833a" />
-    <title>Egor Vikturov - Music</title>
+    <title data-i18n="musicPageTitle">Egor Vikturov - Music</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,12 +21,12 @@
   </head>
   <body>
     <header class="site-header">
-      <nav class="nav" aria-label="Основная навигация">
+      <nav class="nav" aria-label="Основная навигация" data-i18n-attrs="aria-label:navAria">
         <ul class="nav-links">
-          <li><a href="./index.html">Главная</a></li>
-          <li><a href="./projects.html">Проекты</a></li>
-          <li><a href="./music.html" class="active" aria-current="page">Музыка</a></li>
-          <li><a href="./editor.html">Редактор</a></li>
+          <li><a href="./index.html" data-i18n="navHome">Главная</a></li>
+          <li><a href="./projects.html" data-i18n="navProjects">Проекты</a></li>
+          <li><a href="./music.html" class="active" aria-current="page" data-i18n="navMusic">Музыка</a></li>
+          <li><a href="./editor.html" data-i18n="navEditor">Редактор</a></li>
         </ul>
 
         <a class="nav-logo" href="./index.html" aria-label="Egor Vikturov">
@@ -33,10 +34,10 @@
         </a>
 
         <div class="nav-right">
-          <a href="mailto:hello@example.com" class="btn-nav">Контакты</a>
-          <div class="lang-switch" aria-label="Переключение языка">
-            <button class="active" type="button">RU</button>
-            <button type="button">EN</button>
+          <a href="mailto:hello@example.com" class="btn-nav" data-i18n="navContacts">Контакты</a>
+          <div class="lang-switch" aria-label="Переключение языка" data-i18n-attrs="aria-label:langSwitchAria">
+            <button class="active" type="button" data-lang="ru">RU</button>
+            <button type="button" data-lang="en">EN</button>
           </div>
         </div>
       </nav>
@@ -44,9 +45,9 @@
 
     <main>
       <section class="music-hero">
-        <div class="hero-eyebrow music-eyebrow">Музыка & Гитара</div>
-        <h1>Моя музыка</h1>
-        <p class="music-hero-sub">
+        <div class="hero-eyebrow music-eyebrow" data-i18n="musicEyebrow">Музыка & Гитара</div>
+        <h1 data-i18n="musicTitle">Моя музыка</h1>
+        <p class="music-hero-sub" data-i18n="musicHeroSub">
           Я пишу оригинальные саундтреки для своих VR-игр, а также играю на
           гитаре. Здесь собраны плейлисты, музыкальные эксперименты и видео с
           живыми записями.
@@ -70,8 +71,8 @@
 
       <section class="section" id="playlists">
         <div class="section-head">
-          <span class="section-label">// слушать</span>
-          <h2 class="section-title">Плейлисты</h2>
+          <span class="section-label" data-i18n="listenLabel">// слушать</span>
+          <h2 class="section-title" data-i18n="playlistsTitle">Плейлисты</h2>
           <div class="section-line"></div>
         </div>
 
@@ -83,21 +84,21 @@
                 <span class="cover-label">Game Soundtrack</span>
               </div>
               <div class="playlist-overlay">
-                <div class="play-btn">Play</div>
+                <div class="play-btn" data-i18n="play">Play</div>
               </div>
               <span class="platform-badge">Spotify</span>
             </div>
             <div class="playlist-info">
-              <div class="playlist-platform">Spotify · Featured</div>
+              <div class="playlist-platform" data-i18n="spotifyFeatured">Spotify · Featured</div>
               <h3 class="playlist-name">Quest Island VR - Original Soundtrack</h3>
-              <p class="playlist-desc">
+              <p class="playlist-desc" data-i18n="questOstDesc">
                 Полный саундтрек к VR-игре Quest Island: атмосферная музыка для
                 ощущения таинственного острова, спокойные ambient-треки и
                 динамичные темы для головоломок.
               </p>
               <div class="playlist-meta">
-                <span class="playlist-tracks">8 треков · ~24 мин</span>
-                <span class="arrow-link">Слушать</span>
+                <span class="playlist-tracks" data-i18n="tracksQuest">8 треков · ~24 мин</span>
+                <span class="arrow-link" data-i18n="listenAction">Слушать</span>
               </div>
             </div>
           </a>
@@ -109,20 +110,20 @@
                 <span class="cover-label">Action</span>
               </div>
               <div class="playlist-overlay">
-                <div class="play-btn">Play</div>
+                <div class="play-btn" data-i18n="play">Play</div>
               </div>
               <span class="platform-badge">Spotify</span>
             </div>
             <div class="playlist-info">
               <div class="playlist-platform">Spotify</div>
               <h3 class="playlist-name">VR Weapon System OST</h3>
-              <p class="playlist-desc">
+              <p class="playlist-desc" data-i18n="weaponOstDesc">
                 Динамичные треки для VR Weapon System Asset: тяжелые риффы,
                 напряжение и экшен-атмосфера.
               </p>
               <div class="playlist-meta">
-                <span class="playlist-tracks">5 треков</span>
-                <span class="arrow-link">Открыть</span>
+                <span class="playlist-tracks" data-i18n="tracksFive">5 треков</span>
+                <span class="arrow-link" data-i18n="openAction">Открыть</span>
               </div>
             </div>
           </a>
@@ -134,20 +135,20 @@
                 <span class="cover-label">Ambient</span>
               </div>
               <div class="playlist-overlay">
-                <div class="play-btn">Play</div>
+                <div class="play-btn" data-i18n="play">Play</div>
               </div>
               <span class="platform-badge">SoundCloud</span>
             </div>
             <div class="playlist-info">
               <div class="playlist-platform">SoundCloud</div>
               <h3 class="playlist-name">Ambient Experiments</h3>
-              <p class="playlist-desc">
+              <p class="playlist-desc" data-i18n="ambientDesc">
                 Экспериментальные ambient-наброски: музыка для разработки,
                 фокуса и поиска игровой атмосферы.
               </p>
               <div class="playlist-meta">
-                <span class="playlist-tracks">12 треков</span>
-                <span class="arrow-link">Открыть</span>
+                <span class="playlist-tracks" data-i18n="tracksTwelve">12 треков</span>
+                <span class="arrow-link" data-i18n="openAction">Открыть</span>
               </div>
             </div>
           </a>
@@ -159,20 +160,20 @@
                 <span class="cover-label">Guitar</span>
               </div>
               <div class="playlist-overlay">
-                <div class="play-btn">Play</div>
+                <div class="play-btn" data-i18n="play">Play</div>
               </div>
               <span class="platform-badge">YouTube</span>
             </div>
             <div class="playlist-info">
               <div class="playlist-platform">YouTube</div>
-              <h3 class="playlist-name">Гитарные записи</h3>
-              <p class="playlist-desc">
+              <h3 class="playlist-name" data-i18n="guitarRecords">Гитарные записи</h3>
+              <p class="playlist-desc" data-i18n="guitarPlaylistDesc">
                 Плейлист с живыми записями: каверы и собственные композиции на
                 гитаре.
               </p>
               <div class="playlist-meta">
-                <span class="playlist-tracks">Плейлист</span>
-                <span class="arrow-link">Смотреть</span>
+                <span class="playlist-tracks" data-i18n="playlist">Плейлист</span>
+                <span class="arrow-link" data-i18n="watchAction">Смотреть</span>
               </div>
             </div>
           </a>
@@ -184,20 +185,20 @@
                 <span class="cover-label">Synth</span>
               </div>
               <div class="playlist-overlay">
-                <div class="play-btn">Play</div>
+                <div class="play-btn" data-i18n="play">Play</div>
               </div>
               <span class="platform-badge">Spotify</span>
             </div>
             <div class="playlist-info">
               <div class="playlist-platform">Spotify</div>
               <h3 class="playlist-name">Synth & Electronics</h3>
-              <p class="playlist-desc">
+              <p class="playlist-desc" data-i18n="synthDesc">
                 Синтезаторные и электронные треки: эксперименты со звуком,
                 ритмом и пространством.
               </p>
               <div class="playlist-meta">
-                <span class="playlist-tracks">7 треков</span>
-                <span class="arrow-link">Открыть</span>
+                <span class="playlist-tracks" data-i18n="tracksSeven">7 треков</span>
+                <span class="arrow-link" data-i18n="openAction">Открыть</span>
               </div>
             </div>
           </a>
@@ -208,8 +209,8 @@
 
       <section class="section" id="videos">
         <div class="section-head">
-          <span class="section-label">// смотреть</span>
-          <h2 class="section-title">Видео с гитарой</h2>
+          <span class="section-label" data-i18n="watchLabel">// смотреть</span>
+          <h2 class="section-title" data-i18n="guitarVideosTitle">Видео с гитарой</h2>
           <div class="section-line"></div>
         </div>
 
@@ -218,15 +219,15 @@
             <div class="yt-thumb">
               <div class="yt-placeholder">
                 <div class="yt-play-overlay">
-                  <div class="yt-play-icon">Play</div>
-                  <div class="yt-video-title-overlay">Гитарное видео 1</div>
+                  <div class="yt-play-icon" data-i18n="play">Play</div>
+                  <div class="yt-video-title-overlay" data-i18n="guitarVideoOne">Гитарное видео 1</div>
                 </div>
               </div>
             </div>
             <div class="yt-info">
               <div class="yt-channel">YouTube · Egor Vikturov</div>
-              <h3 class="yt-title">Название видео 1</h3>
-              <p class="yt-desc">
+              <h3 class="yt-title" data-i18n="videoTitleOne">Название видео 1</h3>
+              <p class="yt-desc" data-i18n="videoDescOne">
                 Короткое описание: что играешь, кавер или собственная композиция,
                 настроение записи.
               </p>
@@ -237,15 +238,15 @@
             <div class="yt-thumb">
               <div class="yt-placeholder">
                 <div class="yt-play-overlay">
-                  <div class="yt-play-icon">Play</div>
-                  <div class="yt-video-title-overlay">Гитарное видео 2</div>
+                  <div class="yt-play-icon" data-i18n="play">Play</div>
+                  <div class="yt-video-title-overlay" data-i18n="guitarVideoTwo">Гитарное видео 2</div>
                 </div>
               </div>
             </div>
             <div class="yt-info">
               <div class="yt-channel">YouTube · Egor Vikturov</div>
-              <h3 class="yt-title">Название видео 2</h3>
-              <p class="yt-desc">
+              <h3 class="yt-title" data-i18n="videoTitleTwo">Название видео 2</h3>
+              <p class="yt-desc" data-i18n="videoDescTwo">
                 Короткое описание: техника, стиль, атмосфера или контекст записи.
               </p>
             </div>
@@ -255,15 +256,15 @@
             <div class="yt-thumb">
               <div class="yt-placeholder">
                 <div class="yt-play-overlay">
-                  <div class="yt-play-icon">Play</div>
-                  <div class="yt-video-title-overlay">Гитарное видео 3</div>
+                  <div class="yt-play-icon" data-i18n="play">Play</div>
+                  <div class="yt-video-title-overlay" data-i18n="guitarVideoThree">Гитарное видео 3</div>
                 </div>
               </div>
             </div>
             <div class="yt-info">
               <div class="yt-channel">YouTube · Egor Vikturov</div>
-              <h3 class="yt-title">Название видео 3</h3>
-              <p class="yt-desc">Короткое описание видео.</p>
+              <h3 class="yt-title" data-i18n="videoTitleThree">Название видео 3</h3>
+              <p class="yt-desc" data-i18n="videoDescShort">Короткое описание видео.</p>
             </div>
           </article>
 
@@ -271,15 +272,15 @@
             <div class="yt-thumb">
               <div class="yt-placeholder">
                 <div class="yt-play-overlay">
-                  <div class="yt-play-icon">Play</div>
-                  <div class="yt-video-title-overlay">Гитарное видео 4</div>
+                  <div class="yt-play-icon" data-i18n="play">Play</div>
+                  <div class="yt-video-title-overlay" data-i18n="guitarVideoFour">Гитарное видео 4</div>
                 </div>
               </div>
             </div>
             <div class="yt-info">
               <div class="yt-channel">YouTube · Egor Vikturov</div>
-              <h3 class="yt-title">Название видео 4</h3>
-              <p class="yt-desc">Короткое описание видео.</p>
+              <h3 class="yt-title" data-i18n="videoTitleFour">Название видео 4</h3>
+              <p class="yt-desc" data-i18n="videoDescShort">Короткое описание видео.</p>
             </div>
           </article>
         </div>
@@ -287,18 +288,19 @@
 
       <section class="cta-banner">
         <div class="cta-text">
-          <h2>Нужна музыка для игры?</h2>
-          <p>
+          <h2 data-i18n="musicCtaTitle">Нужна музыка для игры?</h2>
+          <p data-i18n="musicCtaText">
             Пишу оригинальные саундтреки для VR-проектов и игр: от атмосферного
             ambient до динамичного экшена. Обсудим?
           </p>
         </div>
-        <a href="mailto:hello@example.com" class="btn-cta">Написать</a>
+        <a href="mailto:hello@example.com" class="btn-cta" data-i18n="ctaButton">Написать</a>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>© 2026 Egor Vikturov · VR Developer & Game Designer</p>
+      <p data-i18n="footer">© 2026 Egor Vikturov · VR Developer & Game Designer</p>
     </footer>
+    <script src="./assets/js/i18n.js"></script>
   </body>
 </html>
