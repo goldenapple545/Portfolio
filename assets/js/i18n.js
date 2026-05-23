@@ -15,6 +15,7 @@ const translations = {
     newProjectTitle: "Новый проект",
     openButton: "Открыть",
     learnMoreButton: "Подробнее",
+    sentMessage: "Отправлено!",
   },
   en: {
     metaDescription:
@@ -183,6 +184,38 @@ const translations = {
     placeholderOpenVideo: "Open video",
     placeholderLearnMore: "Learn more",
     placeholderLines: "One item per line",
+    contactsMetaDescription:
+      "Contacts of Egor Vikturov: collaboration on VR projects, gamedev, and music.",
+    contactsPageTitle: "Egor Vikturov - Contacts",
+    contactsLayoutAria: "Contact information",
+    contactsEyebrow: "In Touch",
+    contactsTitle: "Contacts",
+    contactsHeroSub:
+      "Open to collaboration on VR projects, gamedev, and music composition. Write to me - I reply quickly.",
+    contactsIntroTitle: "Let's Work Together",
+    contactsIntroText:
+      "Looking for a VR developer for an indie game, corporate training simulator, or Unity asset? Or need an original soundtrack? Write to me and we will discuss the details.",
+    emailLabel: "Email",
+    copyEmail: "Copy",
+    socialsLabel: "Socials and Platforms",
+    vkName: "VK",
+    contactFormTitle: "Send a Message",
+    contactFormSub: "Fill out the form - I will reply within a day",
+    contactName: "Name",
+    placeholderName: "Your name",
+    contactTopic: "Topic",
+    topicVr: "VR Project",
+    topicSoundtrack: "Soundtrack",
+    topicCollab: "Collaboration",
+    topicOther: "Other",
+    contactSubject: "Subject",
+    placeholderSubject: "Briefly describe your request",
+    contactMessage: "Message",
+    placeholderMessage: "Tell me more about the project or question...",
+    sendMessage: "Send Message",
+    sentMessage: "Sent!",
+    directEmailPrefix: "Or write directly -",
+    emailCopied: "Email copied!",
   },
 };
 

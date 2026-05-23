@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Контакты Егора Виктурова: сотрудничество по VR-проектам, геймдеву и музыке."
+      data-i18n-attrs="content:contactsMetaDescription"
+    />
+    <meta name="theme-color" content="#e8833a" />
+    <title data-i18n="contactsPageTitle">Egor Vikturov - Контакты</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <script src="./assets/js/i18n.js" defer></script>
+    <script src="./assets/js/contacts.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Основная навигация" data-i18n-attrs="aria-label:navAria">
+        <ul class="nav-links">
+          <li><a href="./index.html" data-i18n="navHome">Главная</a></li>
+          <li><a href="./projects.html" data-i18n="navProjects">Проекты</a></li>
+          <li><a href="./music.html" data-i18n="navMusic">Музыка</a></li>
+          <li><a href="./editor.html" data-i18n="navEditor">Редактор</a></li>
+        </ul>
+
+        <a class="nav-logo" href="./index.html" aria-label="Egor Vikturov">
+          <img src="./assets/img/avatar.jpg" alt="Egor Vikturov" />
+        </a>
+
+        <div class="nav-right">
+          <a href="./contacts.html" class="btn-nav active" aria-current="page" data-i18n="navContacts">Контакты</a>
+          <div class="lang-switch" aria-label="Переключение языка" data-i18n-attrs="aria-label:langSwitchAria">
+            <button class="active" type="button" data-lang="ru">RU</button>
+            <button type="button" data-lang="en">EN</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="contact-page">
+      <section class="contact-hero">
+        <div class="hero-eyebrow contact-eyebrow" data-i18n="contactsEyebrow">На связи</div>
+        <h1 data-i18n="contactsTitle">Контакты</h1>
+        <p class="contact-hero-sub" data-i18n="contactsHeroSub">
+          Открыт к сотрудничеству по VR-проектам, геймдеву и написанию музыки.
+          Пишите - отвечу быстро.
+        </p>
+      </section>
+
+      <section class="contact-layout" aria-label="Контактная информация" data-i18n-attrs="aria-label:contactsLayoutAria">
+        <div class="contact-left">
+          <div class="contact-intro">
+            <h2 data-i18n="contactsIntroTitle">Давайте работать вместе</h2>
+            <p data-i18n="contactsIntroText">
+              Ищете VR-разработчика для инди-игры, корпоративного тренажера или Unity Asset?
+              Или нужен оригинальный саундтрек? Напишите - обсудим детали.
+            </p>
+          </div>
+
+          <div>
+            <div class="socials-label" data-i18n="emailLabel">Электронная почта</div>
+            <a href="mailto:your@email.com" class="email-block" data-email-link>
+              <div class="email-icon-wrap" aria-hidden="true">@</div>
+              <div>
+                <div class="email-label">Email</div>
+                <div class="email-address" data-email-address>your@email.com</div>
+              </div>
+              <button class="email-copy" type="button" data-copy-email data-i18n="copyEmail">Копировать</button>
+            </a>
+          </div>
+
+          <div>
+            <div class="socials-label" data-i18n="socialsLabel">Соцсети и платформы</div>
+            <div class="socials-grid">
+              <a href="https://t.me/YOUR_USERNAME" class="social-btn telegram" target="_blank" rel="noopener">
+                <div class="social-icon" aria-hidden="true">TG</div>
+                <div class="social-btn-text">
+                  <span class="social-btn-name">Telegram</span>
+                  <span class="social-btn-handle">@your_username</span>
+                </div>
+                <span class="social-arrow" aria-hidden="true">→</span>
+              </a>
+
+              <a href="https://github.com/YOUR_USERNAME" class="social-btn github" target="_blank" rel="noopener">
+                <div class="social-icon" aria-hidden="true">GH</div>
+                <div class="social-btn-text">
+                  <span class="social-btn-name">GitHub</span>
+                  <span class="social-btn-handle">github.com/username</span>
+                </div>
+                <span class="social-arrow" aria-hidden="true">→</span>
+              </a>
+
+              <a href="https://YOUR_USERNAME.itch.io" class="social-btn itchio" target="_blank" rel="noopener">
+                <div class="social-icon" aria-hidden="true">IT</div>
+                <div class="social-btn-text">
+                  <span class="social-btn-name">itch.io</span>
+                  <span class="social-btn-handle">username.itch.io</span>
+                </div>
+                <span class="social-arrow" aria-hidden="true">→</span>
+              </a>
+
+              <a href="https://youtube.com/@YOUR_CHANNEL" class="social-btn youtube" target="_blank" rel="noopener">
+                <div class="social-icon" aria-hidden="true">YT</div>
+                <div class="social-btn-text">
+                  <span class="social-btn-name">YouTube</span>
+                  <span class="social-btn-handle">@your_channel</span>
+                </div>
+                <span class="social-arrow" aria-hidden="true">→</span>
+              </a>
+
+              <a href="https://linkedin.com/in/YOUR_USERNAME" class="social-btn linkedin" target="_blank" rel="noopener">
+                <div class="social-icon" aria-hidden="true">IN</div>
+                <div class="social-btn-text">
+                  <span class="social-btn-name">LinkedIn</span>
+                  <span class="social-btn-handle">in/username</span>
+                </div>
+                <span class="social-arrow" aria-hidden="true">→</span>
+              </a>
+
+              <a href="https://vk.com/YOUR_USERNAME" class="social-btn vk" target="_blank" rel="noopener">
+                <div class="social-icon" aria-hidden="true">VK</div>
+                <div class="social-btn-text">
+                  <span class="social-btn-name" data-i18n="vkName">ВКонтакте</span>
+                  <span class="social-btn-handle">vk.com/username</span>
+                </div>
+                <span class="social-arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-header">
+            <h2 data-i18n="contactFormTitle">Написать сообщение</h2>
+            <p data-i18n="contactFormSub">Заполните форму - отвечу в течение суток</p>
+          </div>
+
+          <form data-contact-form>
+            <div class="form-row">
+              <div>
+                <label for="name" data-i18n="contactName">Имя</label>
+                <input type="text" id="name" placeholder="Ваше имя" required data-i18n-attrs="placeholder:placeholderName" />
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="email@example.com" required />
+              </div>
+            </div>
+
+            <div class="form-topic">
+              <label data-i18n="contactTopic">Тема обращения</label>
+              <div class="topic-chips">
+                <button type="button" class="topic-chip" data-topic-chip data-i18n="topicVr">VR-проект</button>
+                <button type="button" class="topic-chip">Unity Asset</button>
+                <button type="button" class="topic-chip active" data-topic-chip data-i18n="topicSoundtrack">Саундтрек</button>
+                <button type="button" class="topic-chip" data-topic-chip data-i18n="topicCollab">Сотрудничество</button>
+                <button type="button" class="topic-chip" data-topic-chip data-i18n="topicOther">Другое</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="subject" data-i18n="contactSubject">Заголовок</label>
+              <input type="text" id="subject" placeholder="Кратко о вашем запросе" data-i18n-attrs="placeholder:placeholderSubject" />
+            </div>
+
+            <div class="form-group">
+              <label for="message" data-i18n="contactMessage">Сообщение</label>
+              <textarea
+                id="message"
+                placeholder="Расскажите подробнее о проекте или вопросе..."
+                required
+                data-i18n-attrs="placeholder:placeholderMessage"
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">
+              <span data-submit-label data-i18n="sendMessage">Отправить сообщение</span>
+              <span aria-hidden="true">@</span>
+            </button>
+
+            <p class="form-note">
+              <span data-i18n="directEmailPrefix">Или пишите напрямую -</span>
+              <a href="mailto:your@email.com">your@email.com</a>
+            </p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p data-i18n="footer">© 2026 Egor Vikturov · VR Developer & Game Designer</p>
+    </footer>
+
+    <div class="toast" id="toast" data-i18n="emailCopied">Email скопирован!</div>
+  </body>
+</html>
