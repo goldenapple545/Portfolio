@@ -1997,7 +1997,7 @@ a {
 
 .image-manager-item {
   display: grid;
-  grid-template-columns: 56px minmax(0, 1fr) auto;
+  grid-template-columns: 96px minmax(0, 1fr) auto;
   align-items: center;
   gap: 10px;
   padding: 8px;
@@ -2007,11 +2007,42 @@ a {
 }
 
 .image-manager-item img {
-  width: 56px;
-  height: 40px;
+  width: 96px;
+  height: 68px;
   border-radius: 6px;
   object-fit: cover;
   background: #f1f1f1;
+}
+
+[data-cover-preview] .image-manager-item {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+[data-cover-preview] .image-manager-item img {
+  width: 100%;
+  height: 180px;
+}
+
+[data-cover-preview] .image-remove-button {
+  justify-self: start;
+}
+
+.gallery-manager {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.gallery-manager .image-manager-item {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+
+.gallery-manager .image-manager-item img {
+  width: 100%;
+  height: 108px;
+}
+
+.gallery-manager .image-remove-button {
+  justify-self: start;
 }
 
 .image-manager-meta {

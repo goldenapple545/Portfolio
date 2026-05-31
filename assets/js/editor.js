@@ -11,6 +11,27 @@ const galleryInput = document.querySelector("[data-gallery-files]");
 const coverPreviewRoot = document.querySelector("[data-cover-preview]");
 const galleryManagerRoot = document.querySelector("[data-gallery-manager]");
 
+const ASSET_IMAGE_PATHS_BY_FILE = {
+  "2025-02-05_21-38-56.png": "./assets/img/FlyAcademy/2025-02-05_21-38-56.png",
+  "2025-02-05_21-39-26.png": "./assets/img/FlyAcademy/2025-02-05_21-39-26.png",
+  "720_6a0b682e82682c5cc0be46a0.jpg": "./assets/img/Saper/720_6a0b682e82682c5cc0be46a0.jpg",
+  "S78E29ma_gqPVxhXqDIICc95r8V9MEU5ooiO5GAjOfORvN1HgTrELX64D-LLTlFnKZsrdbNT_zZXUU-No1N9-5p-.jpg":
+    "./assets/img/SenseAndHome/S78E29ma_gqPVxhXqDIICc95r8V9MEU5ooiO5GAjOfORvN1HgTrELX64D-LLTlFnKZsrdbNT_zZXUU-No1N9-5p-.jpg",
+  "__10.png": "./assets/img/Old Projects/__10.png",
+  "__9.png": "./assets/img/Old Projects/__9.png",
+  "comstresslevelzerobo.jpg": "./assets/img/Old Projects/comstresslevelzerobo.jpg",
+  "main (1).png": "./assets/img/Project1/main (1).png",
+  "main (2).png": "./assets/img/Project1/main (2).png",
+  "main (3).png": "./assets/img/Project1/main (3).png",
+  "n9.png": "./assets/img/FlyAcademy/n9.png",
+  "n91.png": "./assets/img/FlyAcademy/n91.png",
+  "n92.png": "./assets/img/FlyAcademy/n92.png",
+  "n98.jpeg": "./assets/img/FlyAcademy/n98.jpeg",
+  "photo_2023-07-23_14-.jpg": "./assets/img/Project2/photo_2023-07-23_14-.jpg",
+  "t7SdfCHSW0ffvOE5zi1fOUzAfTwDvyzdd804nTcFPuDbqLTE2jziTyQU1pybPOWYgPEYkzEyuWCecFTJd_jjfPeB.jpg":
+    "./assets/img/SenseAndHome/t7SdfCHSW0ffvOE5zi1fOUzAfTwDvyzdd804nTcFPuDbqLTE2jziTyQU1pybPOWYgPEYkzEyuWCecFTJd_jjfPeB.jpg",
+};
+
 let projects = [];
 let selectedId = "";
 
@@ -197,6 +218,16 @@ function getCoverPreviewLabel() {
   return getLanguage() === "en" ? "Cover" : "Обложка";
 }
 
+function getImageMetaLabel(src) {
+  if (!src.startsWith("data:image/")) {
+    return src;
+  }
+
+  const match = src.match(/^data:image\/([^;]+);base64,/i);
+  const type = match?.[1]?.toUpperCase() || "IMAGE";
+  return getLanguage() === "en" ? `${type} embedded image` : `${type} встроенное изображение`;
+}
+
 function saveProjects() {
   localStorage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(projects, null, 2));
 }
@@ -219,18 +250,58 @@ function normalizeProjects(value) {
   return Array.isArray(value)
     ? value
         .filter((project) => project?.id)
-        .map((project) => ({
-          ...project,
-          gallery: repairGallery(project.gallery),
-        }))
+        .map((project) => {
+          const gallery = repairGallery(project.gallery);
+          return {
+            ...project,
+            image: project.image || gallery[0] || "",
+            gallery,
+          };
+        })
     : [];
+}
+
+function isDataImage(value) {
+  return typeof value === "string" && value.startsWith("data:image/");
+}
+
+function preferAssetImage(savedValue, baseValue) {
+  if ((!savedValue || isDataImage(savedValue)) && baseValue && !isDataImage(baseValue)) {
+    return baseValue;
+  }
+
+  return savedValue || baseValue || "";
+}
+
+function preferAssetGallery(savedValue, baseValue) {
+  const savedGallery = repairGallery(savedValue);
+  const baseGallery = repairGallery(baseValue);
+  const hasEmbeddedImages = savedGallery.some(isDataImage);
+
+  if ((savedGallery.length === 0 || hasEmbeddedImages) && baseGallery.some((item) => !isDataImage(item))) {
+    return baseGallery;
+  }
+
+  return savedGallery;
 }
 
 function mergeProjects(baseProjects, savedProjects) {
   const normalizedBase = normalizeProjects(baseProjects);
   const normalizedSaved = normalizeProjects(savedProjects);
   const savedById = new Map(normalizedSaved.map((project) => [project.id, project]));
-  const merged = normalizedBase.map((project) => savedById.get(project.id) || project);
+  const merged = normalizedBase.map((project) => {
+    const savedProject = savedById.get(project.id);
+    if (!savedProject) {
+      return project;
+    }
+
+    return {
+      ...project,
+      ...savedProject,
+      image: preferAssetImage(savedProject.image, project.image),
+      gallery: preferAssetGallery(savedProject.gallery, project.gallery),
+    };
+  });
   const baseIds = new Set(normalizedBase.map((project) => project.id));
   const savedOnly = normalizedSaved.filter((project) => !baseIds.has(project.id));
 
@@ -284,14 +355,15 @@ function readForm() {
     primaryActionLabel: data.get("primaryActionLabel").trim(),
     secondaryActionLabel: data.get("secondaryActionLabel").trim(),
   };
+  const gallery = repairGallery(data.get("gallery"));
 
   const updated = {
     ...(current || {}),
     id: current?.id || slugify(title),
     primaryActionUrl: data.get("primaryActionUrl").trim() || "#",
     secondaryActionUrl: data.get("secondaryActionUrl").trim() || "#",
-    image: data.get("image").trim(),
-    gallery: repairGallery(data.get("gallery")),
+    image: data.get("image").trim() || gallery[0] || "",
+    gallery,
     flipped: data.get("flipped") === "on",
   };
 
@@ -342,7 +414,7 @@ function createImageManagerItem(src, label, onRemove) {
 
   const meta = document.createElement("div");
   meta.className = "image-manager-meta";
-  meta.innerHTML = `<span>${escapeHtml(label)}</span><small>${escapeHtml(src)}</small>`;
+  meta.innerHTML = `<span>${escapeHtml(label)}</span><small title="${escapeHtml(src)}">${escapeHtml(getImageMetaLabel(src))}</small>`;
 
   const removeButton = document.createElement("button");
   removeButton.type = "button";
@@ -499,6 +571,10 @@ function fileToDataUrl(file) {
   });
 }
 
+function fileToImageSource(file) {
+  return ASSET_IMAGE_PATHS_BY_FILE[file.name] || fileToDataUrl(file);
+}
+
 async function loadInitialProjects() {
   form.dataset.loading = "true";
   const savedProjects = parseProjectsJson(localStorage.getItem(PROJECTS_STORAGE_KEY));
@@ -603,7 +679,7 @@ coverInput.addEventListener("change", async () => {
   const [file] = coverInput.files;
   if (!file) return;
 
-  form.elements.image.value = await fileToDataUrl(file);
+  form.elements.image.value = await fileToImageSource(file);
   syncCurrentForm();
   coverInput.value = "";
 });
@@ -612,8 +688,11 @@ galleryInput.addEventListener("change", async () => {
   const files = Array.from(galleryInput.files);
   if (files.length === 0) return;
 
-  const urls = await Promise.all(files.map(fileToDataUrl));
+  const urls = await Promise.all(files.map(fileToImageSource));
   const current = repairGallery(form.elements.gallery.value);
+  if (!form.elements.image.value.trim()) {
+    form.elements.image.value = urls[0];
+  }
   form.elements.gallery.value = [...current, ...urls].join(", ");
   syncCurrentForm();
   galleryInput.value = "";
