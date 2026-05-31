@@ -1986,6 +1986,74 @@ a {
   resize: vertical;
 }
 
+.image-manager {
+  display: grid;
+  gap: 8px;
+}
+
+.image-manager:empty {
+  display: none;
+}
+
+.image-manager-item {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fffaf6;
+}
+
+.image-manager-item img {
+  width: 56px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #f1f1f1;
+}
+
+.image-manager-meta {
+  min-width: 0;
+}
+
+.image-manager-meta span,
+.image-manager-meta small {
+  display: block;
+}
+
+.image-manager-meta span {
+  font-weight: 700;
+}
+
+.image-manager-meta small {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.image-remove-button {
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 1px solid #c0342b;
+  border-radius: 7px;
+  background: #fff;
+  color: #c0342b;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.image-remove-button:hover {
+  background: #c0342b;
+  color: #fff;
+}
+
 .checkbox-row {
   display: flex !important;
   align-items: center;

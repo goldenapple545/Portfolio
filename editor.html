@@ -19,7 +19,7 @@
     />
     <link rel="stylesheet" href="./assets/css/styles.css" />
     <script src="./assets/js/i18n.js" defer></script>
-    <script src="./assets/js/editor.js" defer></script>
+    <script src="./assets/js/editor.js?v=7" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -91,6 +91,7 @@
             <label>
               <span data-i18n="fieldCover">Обложка</span>
               <input name="image" type="text" placeholder="URL или data:image..." data-i18n-attrs="placeholder:placeholderImage" />
+              <div class="image-manager" data-cover-preview></div>
             </label>
 
             <label>
@@ -101,6 +102,7 @@
             <label>
               <span data-i18n="fieldGallery">Галерея</span>
               <input name="gallery" type="text" placeholder="URL через запятую" data-i18n-attrs="placeholder:placeholderGallery" />
+              <div class="image-manager gallery-manager" data-gallery-manager></div>
             </label>
 
             <label>

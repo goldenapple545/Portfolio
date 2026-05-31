@@ -21,9 +21,9 @@
     "primaryActionUrl": "#",
     "secondaryActionLabel": "Asset Store",
     "secondaryActionUrl": "#",
-    "image": "https://placehold.co/580x420/202020/e8833a?text=VR+Weapon+System",
+    "image": "./assets/img/Project1/main (1).png",
     "gallery": [
-      "https://placehold.co/104x72/333333/e8833a?text=1",
+      "./assets/img/Project1/main (1).png",
       "https://placehold.co/104x72/333333/f5f5f5?text=2",
       "https://placehold.co/104x72/333333/f5f5f5?text=3"
     ],
