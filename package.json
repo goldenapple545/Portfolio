@@ -15,5 +15,9 @@
     "github-pages",
     "netlify"
   ],
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@types/pdfkit": "^0.17.6",
+    "pdfkit": "^0.19.1"
+  }
 }
