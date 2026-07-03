@@ -19,7 +19,7 @@
     />
     <link rel="stylesheet" href="./assets/css/styles.css" />
     <script src="./assets/js/i18n.js" defer></script>
-    <script src="./assets/js/editor.js?v=9" defer></script>
+    <script src="./assets/js/editor.js?v=12" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -55,6 +55,7 @@
       <section class="editor-shell" aria-label="Редактор данных проекта" data-i18n-attrs="aria-label:editorShellAria">
         <aside class="editor-sidebar">
           <div class="editor-toolbar">
+            <button class="btn-primary" type="button" data-action="open-file">Открыть data/projects.json</button>
             <button class="btn-primary" type="button" data-action="new" data-i18n="newProject">Новый проект</button>
             <button class="btn-outline" type="button" data-action="export" data-i18n="exportJson">Экспорт JSON</button>
             <label class="file-button">
@@ -63,9 +64,8 @@
             </label>
           </div>
 
-          <div class="editor-note" data-i18n="editorNote">
-            Данные сохраняются в браузере. Для публикации экспортируй JSON и замени им
-            `data/projects.json` в проекте.
+          <div class="editor-note">
+            Редактор работает только при локальном открытии editor.html как файла. Открой data/projects.json и сохраняй изменения в единый файл данных.
           </div>
 
           <div class="project-editor-list" data-project-list></div>
@@ -160,7 +160,7 @@
             <button class="btn-primary" type="submit" data-i18n="saveProject">Сохранить проект</button>
             <button class="btn-outline" type="button" data-action="duplicate" data-i18n="duplicate">Дублировать</button>
             <button class="btn-danger" type="button" data-action="delete" data-i18n="delete">Удалить</button>
-            <button class="btn-outline" type="button" data-action="reset" data-i18n="resetLocalData">Сбросить локальные данные</button>
+            <button class="btn-outline" type="button" data-action="reset">Переоткрыть JSON</button>
           </div>
         </form>
       </section>

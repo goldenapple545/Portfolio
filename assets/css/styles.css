@@ -1835,6 +1835,37 @@ a {
   transform: translateX(-50%) translateY(0);
 }
 
+.editor-notice {
+  position: fixed;
+  top: 88px;
+  left: 50%;
+  z-index: 1000;
+  width: min(560px, calc(100vw - 32px));
+  padding: 14px 18px;
+  border-radius: 8px;
+  background: #15803d;
+  color: #fff;
+  box-shadow: 0 12px 32px rgba(21, 128, 61, 0.24);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+  transform: translateX(-50%) translateY(-16px);
+  transition: opacity 0.22s, transform 0.22s;
+}
+
+.editor-notice.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.editor-notice.error {
+  background: #b42318;
+  box-shadow: 0 12px 32px rgba(180, 35, 24, 0.22);
+}
+
 .empty-state {
   width: 100%;
   padding: 40px;
@@ -1847,6 +1878,27 @@ a {
 
 .editor-page {
   padding-bottom: 80px;
+}
+
+.editor-blocked {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  text-align: center;
+}
+
+.editor-blocked h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.editor-blocked p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
 }
 
 .editor-header {

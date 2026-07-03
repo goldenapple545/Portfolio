@@ -3,7 +3,7 @@ set -euo pipefail
 
 PORT="${PORT:-4173}"
 HOST="${HOST:-localhost}"
-PAGE="${PAGE:-editor.html}"
+PAGE="${PAGE:-projects.html}"
 
 cd "$(dirname "$0")"
 
@@ -66,4 +66,4 @@ echo "Opening ${URL}"
 
 echo "Starting local server at http://${HOST}:${PORT}"
 echo "Keep this window open while editing the site."
-"${PYTHON_BIN}" -m http.server "${PORT}"
+"${PYTHON_BIN}" ./scripts/local-server.py "${PORT}"

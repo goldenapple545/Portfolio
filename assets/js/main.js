@@ -1,4 +1,3 @@
-const PROJECTS_STORAGE_KEY = "egorPortfolioProjects";
 const projectsRoot = document.querySelector("[data-projects-root]");
 
 const defaultImage =
@@ -40,53 +39,6 @@ function normalizeList(value) {
   }
 
   return [];
-}
-
-function isDataImage(value) {
-  return typeof value === "string" && value.startsWith("data:image/");
-}
-
-function preferAssetImage(savedValue, baseValue) {
-  if ((!savedValue || isDataImage(savedValue)) && baseValue && !isDataImage(baseValue)) {
-    return baseValue;
-  }
-
-  return savedValue || baseValue || "";
-}
-
-function preferAssetGallery(savedValue, baseValue) {
-  const savedGallery = normalizeList(savedValue);
-  const baseGallery = normalizeList(baseValue);
-  const hasEmbeddedImages = savedGallery.some(isDataImage);
-
-  if ((savedGallery.length === 0 || hasEmbeddedImages) && baseGallery.some((item) => !isDataImage(item))) {
-    return baseGallery;
-  }
-
-  return savedGallery;
-}
-
-function mergeProjects(baseProjects, savedProjects) {
-  const normalizedBase = Array.isArray(baseProjects) ? baseProjects : [];
-  const normalizedSaved = Array.isArray(savedProjects) ? savedProjects : [];
-  const savedById = new Map(normalizedSaved.filter((project) => project?.id).map((project) => [project.id, project]));
-  const baseIds = new Set(normalizedBase.map((project) => project.id));
-  const merged = normalizedBase.map((project) => {
-    const savedProject = savedById.get(project.id);
-    if (!savedProject) {
-      return project;
-    }
-
-    return {
-      ...project,
-      ...savedProject,
-      image: preferAssetImage(savedProject.image, project.image),
-      gallery: preferAssetGallery(savedProject.gallery, project.gallery),
-    };
-  });
-  const savedOnly = normalizedSaved.filter((project) => project?.id && !baseIds.has(project.id));
-
-  return [...merged, ...savedOnly];
 }
 
 function getLocalizedProject(project) {
@@ -223,33 +175,13 @@ function renderProjects(projects) {
 }
 
 async function loadProjects() {
-  const localProjects = localStorage.getItem(PROJECTS_STORAGE_KEY);
-
-  if (false && localProjects) {
-    try {
-      return JSON.parse(localProjects);
-    } catch (error) {
-      console.warn("Не удалось прочитать локальные проекты", error);
-    }
-  }
-
   const response = await fetch("./data/projects.json", { cache: "no-store" });
 
   if (!response.ok) {
-    throw new Error(`Не удалось загрузить проекты: ${response.status}`);
+    throw new Error(`Could not load projects: ${response.status}`);
   }
 
-  const baseProjects = await response.json();
-
-  if (localProjects) {
-    try {
-      return mergeProjects(baseProjects, JSON.parse(localProjects));
-    } catch (error) {
-      console.warn("Could not read local projects", error);
-    }
-  }
-
-  return baseProjects;
+  return response.json();
 }
 
 if (projectsRoot) {
@@ -275,3 +207,4 @@ if (projectsRoot) {
     renderProjects(loadedProjects);
   });
 }
+

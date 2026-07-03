@@ -1,6 +1,5 @@
-{
-const PROJECTS_STORAGE_KEY = "egorPortfolioProjects";
-const DATA_URL = "./data/projects.json";
+const DATA_FILE_NAME = "projects.json";
+const DATA_FILE_PATH = "data/projects.json";
 
 const form = document.querySelector("[data-project-form]");
 const listRoot = document.querySelector("[data-project-list]");
@@ -10,6 +9,21 @@ const coverInput = document.querySelector("[data-cover-file]");
 const galleryInput = document.querySelector("[data-gallery-files]");
 const coverPreviewRoot = document.querySelector("[data-cover-preview]");
 const galleryManagerRoot = document.querySelector("[data-gallery-manager]");
+const editorShell = document.querySelector(".editor-shell");
+const editorPreview = document.querySelector(".editor-preview");
+const openFileButton = document.querySelector("[data-action='open-file']");
+
+const LOCALIZED_FIELDS = [
+  "title",
+  "category",
+  "tag",
+  "description",
+  "features",
+  "learnings",
+  "technologies",
+  "primaryActionLabel",
+  "secondaryActionLabel",
+];
 
 const ASSET_IMAGE_PATHS_BY_FILE = {
   "2025-02-05_21-38-56.png": "./assets/img/FlyAcademy/2025-02-05_21-38-56.png",
@@ -34,106 +48,8 @@ const ASSET_IMAGE_PATHS_BY_FILE = {
 
 let projects = [];
 let selectedId = "";
-
-const FALLBACK_PROJECTS = [
-  {
-    id: "vr-weapon-system",
-    title: "VR Weapon System",
-    category: "VR В· Unity Asset Store",
-    tag: "Unity Asset",
-    description:
-      "Unity Asset РґР»СЏ VR, РІ РєРѕС‚РѕСЂРѕРј СЏ СЃРѕР±СЂР°Р» РѕСЂСѓР¶РµР№РЅСѓСЋ СЃРёСЃС‚РµРјСѓ, РјРѕРґРµР»Рё, Р·РІСѓРєРё Рё РѕСЃРЅРѕРІРЅС‹Рµ РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёСЏ. Р’Рѕ РІСЂРµРјСЏ СЂР°Р·СЂР°Р±РѕС‚РєРё СЏ Р°РєС‚РёРІРЅРѕ РёР·СѓС‡Р°Р» РїР°С‚С‚РµСЂРЅС‹ РїСЂРѕРµРєС‚РёСЂРѕРІР°РЅРёСЏ, SOLID Рё СЃС‚СЂСѓРєС‚СѓСЂСѓ СЂР°СЃС€РёСЂСЏРµРјС‹С… РёРіСЂРѕРІС‹С… СЃРёСЃС‚РµРј.",
-    features: [
-      "РњРѕРґРµР»Рё РїРёСЃС‚РѕР»РµС‚Р° Sig P320 Рё РІРёРЅС‚РѕРІРєРё M16A4",
-      "РЎРёСЃС‚РµРјР° РїРµСЂРµР·Р°СЂСЏРґРєРё СЃРѕ СЃРјРµРЅРѕР№ РјР°РіР°Р·РёРЅР° Рё РІР·РІРѕРґРѕРј Р·Р°С‚РІРѕСЂР°",
-      "Р’С‹Р±СЂРѕСЃ РіРёР»СЊР·, Р·РІСѓРєРё РѕСЂСѓР¶РёСЏ Рё Р±Р°Р·РѕРІР°СЏ РѕС‚РґР°С‡Р°",
-      "РђСЂС…РёС‚РµРєС‚СѓСЂР° РґР»СЏ СЂР°СЃС€РёСЂРµРЅРёСЏ РЅР°Р±РѕСЂР° РѕСЂСѓР¶РёСЏ",
-    ],
-    learnings: [
-      "РџСЂР°РєС‚РёС‡РµСЃРєРѕРµ РїСЂРёРјРµРЅРµРЅРёРµ РћРћРџ Рё SOLID",
-      "РџР°С‚С‚РµСЂРЅС‹ РїСЂРѕРµРєС‚РёСЂРѕРІР°РЅРёСЏ РІ Unity",
-      "Р Р°Р·СЂР°Р±РѕС‚РєР° РѕСЂСѓР¶РµР№РЅС‹С… СЃРёСЃС‚РµРј РґР»СЏ VR",
-    ],
-    technologies: ["Unity", "C#", "XR Toolkit", "Blender", "SOLID"],
-    primaryActionLabel: "РћС‚РєСЂС‹С‚СЊ РІРёРґРµРѕ",
-    primaryActionUrl: "#",
-    secondaryActionLabel: "Asset Store",
-    secondaryActionUrl: "#",
-    image: "https://placehold.co/580x420/202020/e8833a?text=VR+Weapon+System",
-    gallery: [
-      "https://placehold.co/104x72/333333/e8833a?text=1",
-      "https://placehold.co/104x72/333333/f5f5f5?text=2",
-      "https://placehold.co/104x72/333333/f5f5f5?text=3",
-    ],
-    flipped: false,
-    i18n: {
-      en: {
-        description:
-          "A Unity asset for VR where I built a weapon system, models, sounds, and core interactions. During development, I actively studied design patterns, SOLID, and the structure of expandable game systems.",
-        features: [
-          "Sig P320 pistol and M16A4 rifle models",
-          "Reloading system with magazine change and bolt charging",
-          "Shell ejection, weapon sounds, and basic recoil",
-          "Architecture for expanding the weapon set",
-        ],
-        learnings: ["Practical use of OOP and SOLID", "Design patterns in Unity", "VR weapon system development"],
-        primaryActionLabel: "Open Video",
-      },
-    },
-  },
-  {
-    id: "quest-island-vr",
-    title: "Quest Island VR",
-    category: "VR Game В· Meta Quest В· PCVR",
-    tag: "VR Game",
-    description:
-      "VR-РёРіСЂР° РґР»СЏ Meta Quest Рё PCVR. РРіСЂРѕРє РѕРєР°Р·С‹РІР°РµС‚СЃСЏ РЅР° С‚Р°РёРЅСЃС‚РІРµРЅРЅРѕРј РѕСЃС‚СЂРѕРІРµ, СЂРµС€Р°РµС‚ РіРѕР»РѕРІРѕР»РѕРјРєРё Рё РІР·Р°РёРјРѕРґРµР№СЃС‚РІСѓРµС‚ СЃ РІРёСЂС‚СѓР°Р»СЊРЅРѕР№ РєР»Р°РІРёР°С‚СѓСЂРѕР№, РєР°СЂС‚РѕС‡РєР°РјРё-РєР»СЋС‡Р°РјРё Рё РґСЂСѓРіРёРјРё РїСЂРµРґРјРµС‚Р°РјРё.",
-    features: [
-      "РћСЂРёРіРёРЅР°Р»СЊРЅС‹Р№ РјРёСЂ СЃ СЃРѕР±СЃС‚РІРµРЅРЅРѕР№ Р°С‚РјРѕСЃС„РµСЂРѕР№",
-      "РРЅС‚РµСЂР°РєС‚РёРІРЅС‹Рµ РіРѕР»РѕРІРѕР»РѕРјРєРё Рё РїСЂРµРґРјРµС‚РЅС‹Рµ РјРµС…Р°РЅРёРєРё",
-      "РђРІС‚РѕСЂСЃРєР°СЏ РјСѓР·С‹РєР° Рё Р·РІСѓРєРѕРІРѕРµ РѕС„РѕСЂРјР»РµРЅРёРµ",
-      "РџРѕРґРґРµСЂР¶РєР° Meta Quest Рё PCVR",
-    ],
-    learnings: [],
-    technologies: ["Unity", "Meta Quest", "PCVR", "XR Toolkit", "Original Music"],
-    primaryActionLabel: "РћС‚РєСЂС‹С‚СЊ РІРёРґРµРѕ",
-    primaryActionUrl: "#",
-    secondaryActionLabel: "РџРѕРґСЂРѕР±РЅРµРµ",
-    secondaryActionUrl: "#",
-    image: "https://placehold.co/580x420/0a2a3a/06b6d4?text=Quest+Island+VR",
-    gallery: [
-      "https://placehold.co/104x72/0a2a3a/06b6d4?text=1",
-      "https://placehold.co/104x72/0a3020/f5f5f5?text=2",
-    ],
-    flipped: true,
-    i18n: {
-      en: {
-        description:
-          "A VR game for Meta Quest and PCVR. The player finds themselves on a mysterious island, solves puzzles, and interacts with a virtual keyboard, key cards, and other objects.",
-        features: [
-          "Original world with its own atmosphere",
-          "Interactive puzzles and object-based mechanics",
-          "Original music and sound design",
-          "Support for Meta Quest and PCVR",
-        ],
-        primaryActionLabel: "Open Video",
-        secondaryActionLabel: "Learn More",
-      },
-    },
-  },
-];
-
-const LOCALIZED_FIELDS = [
-  "title",
-  "category",
-  "tag",
-  "description",
-  "features",
-  "learnings",
-  "technologies",
-  "primaryActionLabel",
-  "secondaryActionLabel",
-];
+let projectsFileHandle = null;
+let noticeTimer = 0;
 
 function getLanguage() {
   return window.egorI18n?.getLanguage?.() || "ru";
@@ -141,6 +57,61 @@ function getLanguage() {
 
 function t(key) {
   return window.egorI18n?.getTranslation?.(key) || key;
+}
+
+function isLocalFileEditor() {
+  return window.location.protocol === "file:";
+}
+
+function canWriteLocalFiles() {
+  return Boolean(window.showOpenFilePicker);
+}
+
+function showEditorNotice(message, type = "success") {
+  let notice = document.querySelector("[data-editor-notice]");
+
+  if (!notice) {
+    notice = document.createElement("div");
+    notice.className = "editor-notice";
+    notice.setAttribute("data-editor-notice", "");
+    notice.setAttribute("role", "status");
+    notice.setAttribute("aria-live", "polite");
+    document.body.append(notice);
+  }
+
+  window.clearTimeout(noticeTimer);
+  notice.textContent = message;
+  notice.className = `editor-notice ${type} show`;
+
+  noticeTimer = window.setTimeout(() => {
+    notice.classList.remove("show");
+  }, 3600);
+}
+
+function showEditorBlock(message) {
+  const block = document.createElement("section");
+  block.className = "editor-blocked";
+  block.innerHTML = `
+    <h2>${escapeHtml(getLanguage() === "en" ? "Editor is unavailable" : "Редактор недоступен")}</h2>
+    <p>${escapeHtml(message)}</p>
+  `;
+
+  editorShell?.replaceWith(block);
+  editorPreview?.remove();
+}
+
+function setFormDisabled(disabled) {
+  form?.querySelectorAll("input, textarea, button").forEach((element) => {
+    element.disabled = disabled;
+  });
+
+  document.querySelectorAll("[data-action='new'], [data-action='export']").forEach((element) => {
+    element.disabled = disabled;
+  });
+
+  if (importInput) {
+    importInput.disabled = disabled;
+  }
 }
 
 function slugify(value) {
@@ -154,21 +125,21 @@ function slugify(value) {
 }
 
 function splitLines(value) {
-  return value
+  return String(value || "")
     .split("\n")
     .map((item) => item.trim())
     .filter(Boolean);
 }
 
 function splitComma(value) {
-  return value
+  return String(value || "")
     .split(",")
     .map((item) => item.trim())
     .filter(Boolean);
 }
 
 function splitGallery(value) {
-  return value
+  return String(value || "")
     .split(/,\s*(?=(?:data:image\/|https?:\/\/|\.{1,2}\/))/)
     .map((item) => item.trim())
     .filter(Boolean);
@@ -210,42 +181,6 @@ function escapeHtml(value = "") {
     .replaceAll("'", "&#039;");
 }
 
-function getRemoveImageLabel() {
-  return getLanguage() === "en" ? "Remove" : "Удалить";
-}
-
-function getCoverPreviewLabel() {
-  return getLanguage() === "en" ? "Cover" : "Обложка";
-}
-
-function getImageMetaLabel(src) {
-  if (!src.startsWith("data:image/")) {
-    return src;
-  }
-
-  const match = src.match(/^data:image\/([^;]+);base64,/i);
-  const type = match?.[1]?.toUpperCase() || "IMAGE";
-  return getLanguage() === "en" ? `${type} embedded image` : `${type} встроенное изображение`;
-}
-
-function saveProjects() {
-  localStorage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(projects, null, 2));
-}
-
-function parseProjectsJson(value) {
-  if (!value) {
-    return [];
-  }
-
-  try {
-    const parsed = JSON.parse(value);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (error) {
-    console.warn("Could not read saved projects", error);
-    return [];
-  }
-}
-
 function normalizeProjects(value) {
   return Array.isArray(value)
     ? value
@@ -259,53 +194,6 @@ function normalizeProjects(value) {
           };
         })
     : [];
-}
-
-function isDataImage(value) {
-  return typeof value === "string" && value.startsWith("data:image/");
-}
-
-function preferAssetImage(savedValue, baseValue) {
-  if ((!savedValue || isDataImage(savedValue)) && baseValue && !isDataImage(baseValue)) {
-    return baseValue;
-  }
-
-  return savedValue || baseValue || "";
-}
-
-function preferAssetGallery(savedValue, baseValue) {
-  const savedGallery = repairGallery(savedValue);
-  const baseGallery = repairGallery(baseValue);
-  const hasEmbeddedImages = savedGallery.some(isDataImage);
-
-  if ((savedGallery.length === 0 || hasEmbeddedImages) && baseGallery.some((item) => !isDataImage(item))) {
-    return baseGallery;
-  }
-
-  return savedGallery;
-}
-
-function mergeProjects(baseProjects, savedProjects) {
-  const normalizedBase = normalizeProjects(baseProjects);
-  const normalizedSaved = normalizeProjects(savedProjects);
-  const savedById = new Map(normalizedSaved.map((project) => [project.id, project]));
-  const merged = normalizedBase.map((project) => {
-    const savedProject = savedById.get(project.id);
-    if (!savedProject) {
-      return project;
-    }
-
-    return {
-      ...project,
-      ...savedProject,
-      image: preferAssetImage(savedProject.image, project.image),
-      gallery: preferAssetGallery(savedProject.gallery, project.gallery),
-    };
-  });
-  const baseIds = new Set(normalizedBase.map((project) => project.id));
-  const savedOnly = normalizedSaved.filter((project) => !baseIds.has(project.id));
-
-  return [...merged, ...savedOnly];
 }
 
 function getSelectedProject() {
@@ -404,6 +292,24 @@ function fillForm(project) {
   renderImageManagers();
 }
 
+function getRemoveImageLabel() {
+  return getLanguage() === "en" ? "Remove" : "Удалить";
+}
+
+function getCoverPreviewLabel() {
+  return getLanguage() === "en" ? "Cover" : "Обложка";
+}
+
+function getImageMetaLabel(src) {
+  if (!src.startsWith("data:image/")) {
+    return src;
+  }
+
+  const match = src.match(/^data:image\/([^;]+);base64,/i);
+  const type = match?.[1]?.toUpperCase() || "IMAGE";
+  return getLanguage() === "en" ? `${type} embedded image` : `${type} встроенное изображение`;
+}
+
 function createImageManagerItem(src, label, onRemove) {
   const item = document.createElement("div");
   item.className = "image-manager-item";
@@ -486,10 +392,28 @@ function createProjectCard(project, index) {
   const wrapper = document.createElement("article");
   wrapper.className = `project-card ${project.flipped || index % 2 === 1 ? "flip" : ""}`.trim();
   const image = escapeHtml(project.image || "https://placehold.co/580x420/202020/e8833a?text=Project");
+  const gallery = repairGallery(project.gallery);
+  const galleryMarkup = gallery.length
+    ? `<div class="media-overlay" aria-label="${escapeHtml(t("projectPreviewAria"))}">
+        ${gallery
+          .map(
+            (src, thumbIndex) => `
+              <button class="thumb ${thumbIndex === 0 ? "active" : ""}" type="button" data-preview-thumb="${thumbIndex}" aria-label="${escapeHtml(
+                `${t("projectPreview")} ${thumbIndex + 1}`,
+              )}">
+                <img src="${escapeHtml(src)}" alt="">
+              </button>
+            `,
+          )
+          .join("")}
+      </div>`
+    : "";
+
   wrapper.innerHTML = `
     <div class="project-media">
-      <img src="${image}" alt="">
+      <img src="${image}" alt="" data-preview-cover>
       ${localizedProject.tag ? `<span class="media-tag">${escapeHtml(localizedProject.tag)}</span>` : ""}
+      ${galleryMarkup}
     </div>
     <div class="project-info">
       <div>
@@ -528,6 +452,20 @@ function createProjectCard(project, index) {
       </div>
     </div>
   `;
+
+  const cover = wrapper.querySelector("[data-preview-cover]");
+  wrapper.querySelectorAll("[data-preview-thumb]").forEach((thumb) => {
+    thumb.addEventListener("click", () => {
+      const thumbIndex = Number(thumb.getAttribute("data-preview-thumb"));
+      if (cover && gallery[thumbIndex]) {
+        cover.src = gallery[thumbIndex];
+      }
+
+      wrapper.querySelectorAll("[data-preview-thumb]").forEach((item) => item.classList.remove("active"));
+      thumb.classList.add("active");
+    });
+  });
+
   return wrapper;
 }
 
@@ -538,26 +476,60 @@ function renderPreview() {
   });
 }
 
+function renderAll() {
+  selectedId = projects[0]?.id || "";
+  fillForm(getSelectedProject());
+  renderList();
+  renderPreview();
+}
+
 function syncCurrentForm() {
   if (!selectedId || form.dataset.loading === "true") {
-    return;
+    return false;
   }
 
   const updated = readForm();
   projects = projects.map((project) => (project.id === selectedId ? updated : project));
   selectedId = updated.id;
-  saveProjects();
   renderList();
   renderPreview();
   renderImageManagers();
+  return true;
+}
+
+async function saveProjects() {
+  syncCurrentForm();
+
+  if (!projectsFileHandle) {
+    showEditorNotice(
+      getLanguage() === "en"
+        ? `Open ${DATA_FILE_PATH} first. Changes were not written to disk.`
+        : `Сначала открой ${DATA_FILE_PATH}. Изменения не записаны на диск.`,
+      "error",
+    );
+    return false;
+  }
+
+  try {
+    const writable = await projectsFileHandle.createWritable();
+    await writable.write(JSON.stringify(projects, null, 2));
+    await writable.close();
+    showEditorNotice(getLanguage() === "en" ? "Saved to data/projects.json" : "Сохранено в data/projects.json");
+    return true;
+  } catch (error) {
+    console.error("Could not save projects file", error);
+    showEditorNotice(getLanguage() === "en" ? "Could not write data/projects.json" : "Не удалось записать data/projects.json", "error");
+    return false;
+  }
 }
 
 function downloadJson() {
+  syncCurrentForm();
   const blob = new Blob([JSON.stringify(projects, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = "projects.json";
+  link.download = DATA_FILE_NAME;
   link.click();
   URL.revokeObjectURL(url);
 }
@@ -575,40 +547,84 @@ function fileToImageSource(file) {
   return ASSET_IMAGE_PATHS_BY_FILE[file.name] || fileToDataUrl(file);
 }
 
-async function loadInitialProjects() {
-  form.dataset.loading = "true";
-  const savedProjects = parseProjectsJson(localStorage.getItem(PROJECTS_STORAGE_KEY));
-  let baseProjects = FALLBACK_PROJECTS;
+async function openProjectsFile() {
+  if (!canWriteLocalFiles()) {
+    showEditorNotice(
+      getLanguage() === "en"
+        ? "This browser cannot write local files. Use Chrome or Edge and open editor.html as a file."
+        : "Этот браузер не умеет записывать локальные файлы. Используй Chrome или Edge и открой editor.html как файл.",
+      "error",
+    );
+    return;
+  }
 
   try {
-    const response = await fetch(DATA_URL, { cache: "no-store" });
-    if (response.ok) {
-      const loadedProjects = await response.json();
-      const normalizedLoadedProjects = normalizeProjects(loadedProjects);
-      if (normalizedLoadedProjects.length > 0) {
-        baseProjects = normalizedLoadedProjects;
-      }
-    }
+    const [handle] = await window.showOpenFilePicker({
+      multiple: false,
+      types: [
+        {
+          description: "Project data",
+          accept: { "application/json": [".json"] },
+        },
+      ],
+    });
+    const file = await handle.getFile();
+    const parsed = JSON.parse(await file.text());
+
+    projectsFileHandle = handle;
+    projects = normalizeProjects(parsed);
+    renderAll();
+    setFormDisabled(false);
+    showEditorNotice(getLanguage() === "en" ? `Opened ${file.name}` : `Открыт файл ${file.name}`);
   } catch (error) {
-    console.warn("Could not load base projects", error);
-  }
+    if (error?.name === "AbortError") {
+      return;
+    }
 
-  projects = mergeProjects(baseProjects, savedProjects);
-  if (projects.length === 0) {
-    projects = FALLBACK_PROJECTS;
+    console.error("Could not open projects file", error);
+    showEditorNotice(getLanguage() === "en" ? "Could not open JSON file" : "Не удалось открыть JSON-файл", "error");
   }
-
-  selectedId = projects[0]?.id || "";
-  fillForm(getSelectedProject());
-  renderList();
-  renderPreview();
-  saveProjects();
-  form.dataset.loading = "false";
 }
 
-form.addEventListener("submit", (event) => {
+function importProjectsFile(file) {
+  return file.text().then((text) => {
+    projectsFileHandle = null;
+    projects = normalizeProjects(JSON.parse(text));
+    renderAll();
+    setFormDisabled(false);
+    showEditorNotice(
+      getLanguage() === "en"
+        ? "JSON imported for preview. Use Open data/projects.json to save directly."
+        : "JSON импортирован для предпросмотра. Для прямого сохранения открой data/projects.json.",
+    );
+  });
+}
+
+function initEditor() {
+  if (!isLocalFileEditor()) {
+    setFormDisabled(true);
+    showEditorBlock(
+      getLanguage() === "en"
+        ? "Open editor.html directly from the project folder for local editing. The server and the published site read only data/projects.json."
+        : "Открой editor.html напрямую из папки проекта для локального редактирования. Сервер и опубликованный сайт читают только data/projects.json.",
+    );
+    return;
+  }
+
+  setFormDisabled(true);
+  showEditorNotice(
+    getLanguage() === "en"
+      ? `Open ${DATA_FILE_PATH} before editing.`
+      : `Перед редактированием открой ${DATA_FILE_PATH}.`,
+    "error",
+  );
+}
+
+openFileButton?.addEventListener("click", openProjectsFile);
+
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  syncCurrentForm();
+  await saveProjects();
 });
 
 form.addEventListener("input", () => {
@@ -617,9 +633,9 @@ form.addEventListener("input", () => {
 
 document.querySelector("[data-action='new']").addEventListener("click", () => {
   const project = createProject();
+  syncCurrentForm();
   projects = [...projects, project];
   selectedId = project.id;
-  saveProjects();
   fillForm(project);
   renderList();
   renderPreview();
@@ -629,6 +645,7 @@ document.querySelector("[data-action='duplicate']").addEventListener("click", ()
   const current = getSelectedProject();
   if (!current) return;
 
+  syncCurrentForm();
   const copy = {
     ...current,
     id: `${current.id}-copy-${Date.now()}`,
@@ -636,7 +653,6 @@ document.querySelector("[data-action='duplicate']").addEventListener("click", ()
   };
   projects = [...projects, copy];
   selectedId = copy.id;
-  saveProjects();
   fillForm(copy);
   renderList();
   renderPreview();
@@ -647,75 +663,63 @@ document.querySelector("[data-action='delete']").addEventListener("click", () =>
 
   projects = projects.filter((project) => project.id !== selectedId);
   selectedId = projects[0]?.id || "";
-  saveProjects();
   fillForm(getSelectedProject());
   renderList();
   renderPreview();
 });
 
-document.querySelector("[data-action='reset']").addEventListener("click", async () => {
-  localStorage.removeItem(PROJECTS_STORAGE_KEY);
-  await loadInitialProjects();
-});
-
+document.querySelector("[data-action='reset']").addEventListener("click", openProjectsFile);
 document.querySelector("[data-action='export']").addEventListener("click", downloadJson);
 
 importInput.addEventListener("change", async () => {
   const [file] = importInput.files;
   if (!file) return;
 
-  const text = await file.text();
-  const imported = JSON.parse(text);
-  projects = Array.isArray(imported) ? imported : [];
-  selectedId = projects[0]?.id || "";
-  saveProjects();
-  fillForm(getSelectedProject());
-  renderList();
-  renderPreview();
-  importInput.value = "";
+  try {
+    await importProjectsFile(file);
+  } catch (error) {
+    console.error("Could not import JSON", error);
+    showEditorNotice(getLanguage() === "en" ? "Could not import JSON" : "Не удалось импортировать JSON", "error");
+  } finally {
+    importInput.value = "";
+  }
 });
 
 coverInput.addEventListener("change", async () => {
   const [file] = coverInput.files;
   if (!file) return;
 
-  form.elements.image.value = await fileToImageSource(file);
-  syncCurrentForm();
-  coverInput.value = "";
+  try {
+    form.elements.image.value = await fileToImageSource(file);
+    syncCurrentForm();
+    await saveProjects();
+  } catch (error) {
+    console.error("Could not add cover image", error);
+    showEditorNotice(getLanguage() === "en" ? "Could not add cover image" : "Не удалось добавить обложку", "error");
+  } finally {
+    coverInput.value = "";
+  }
 });
 
 galleryInput.addEventListener("change", async () => {
   const files = Array.from(galleryInput.files);
   if (files.length === 0) return;
 
-  const urls = await Promise.all(files.map(fileToImageSource));
-  const current = repairGallery(form.elements.gallery.value);
-  if (!form.elements.image.value.trim()) {
-    form.elements.image.value = urls[0];
+  try {
+    const urls = await Promise.all(files.map(fileToImageSource));
+    const current = repairGallery(form.elements.gallery.value);
+    if (!form.elements.image.value.trim()) {
+      form.elements.image.value = urls[0];
+    }
+    form.elements.gallery.value = [...current, ...urls].join(", ");
+    syncCurrentForm();
+    await saveProjects();
+  } catch (error) {
+    console.error("Could not add gallery images", error);
+    showEditorNotice(getLanguage() === "en" ? "Could not add gallery images" : "Не удалось добавить изображения", "error");
+  } finally {
+    galleryInput.value = "";
   }
-  form.elements.gallery.value = [...current, ...urls].join(", ");
-  syncCurrentForm();
-  galleryInput.value = "";
-});
-
-projects = FALLBACK_PROJECTS;
-selectedId = projects[0]?.id || "";
-form.dataset.loading = "true";
-fillForm(getSelectedProject());
-renderList();
-renderPreview();
-form.dataset.loading = "false";
-
-loadInitialProjects().catch((error) => {
-  console.error(error);
-  projects = FALLBACK_PROJECTS;
-  selectedId = "";
-  selectedId = projects[0]?.id || "";
-  fillForm(getSelectedProject());
-  renderList();
-  renderPreview();
-  saveProjects();
-  form.dataset.loading = "false";
 });
 
 window.addEventListener("languagechange", () => {
@@ -723,4 +727,5 @@ window.addEventListener("languagechange", () => {
   renderList();
   renderPreview();
 });
-}
+
+initEditor();
