@@ -1083,11 +1083,15 @@ a {
   border-radius: var(--radius);
   overflow: hidden;
   transition: box-shadow 0.2s, transform 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .yt-card:hover {
   box-shadow: 0 8px 28px rgba(232, 131, 58, 0.12);
   transform: translateY(-3px);
+  color: inherit;
 }
 
 .yt-thumb {
@@ -1095,6 +1099,13 @@ a {
   background: #111;
   position: relative;
   overflow: hidden;
+}
+
+.yt-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .yt-placeholder {
