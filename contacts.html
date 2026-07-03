@@ -124,20 +124,30 @@
             <p data-i18n="contactFormSub">Заполните форму - отвечу в течение суток</p>
           </div>
 
-          <form data-contact-form>
+          <form action="https://formsubmit.co/egorvikturov@gmail.com" method="POST" data-contact-form>
+            <!-- FormSubmit configuration -->
+            <input type="hidden" name="_subject" value="Новое сообщение с портфолио!" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_next" value="./contacts.html?sent=true" />
+            
+            <!-- Honeypot anti-spam -->
+            <input type="text" name="_honey" style="display:none" />
+
             <div class="form-row">
               <div>
                 <label for="name" data-i18n="contactName">Имя</label>
-                <input type="text" id="name" placeholder="Ваше имя" required data-i18n-attrs="placeholder:placeholderName" />
+                <input type="text" id="name" name="Имя" placeholder="Ваше имя" required data-i18n-attrs="placeholder:placeholderName" />
               </div>
               <div>
                 <label for="email">Email</label>
-                <input type="email" id="email" placeholder="email@example.com" required />
+                <input type="email" id="email" name="Email" placeholder="email@example.com" required />
               </div>
             </div>
 
             <div class="form-topic">
               <label data-i18n="contactTopic">Тема обращения</label>
+              <input type="hidden" name="Тема" id="topic-value" value="Саундтрек" />
               <div class="topic-chips">
                 <button type="button" class="topic-chip" data-topic-chip data-i18n="topicVr">VR-проект</button>
                 <button type="button" class="topic-chip">Unity Asset</button>
@@ -149,13 +159,14 @@
 
             <div class="form-group">
               <label for="subject" data-i18n="contactSubject">Заголовок</label>
-              <input type="text" id="subject" placeholder="Кратко о вашем запросе" data-i18n-attrs="placeholder:placeholderSubject" />
+              <input type="text" id="subject" name="Заголовок" placeholder="Кратко о вашем запросе" data-i18n-attrs="placeholder:placeholderSubject" />
             </div>
 
             <div class="form-group">
               <label for="message" data-i18n="contactMessage">Сообщение</label>
               <textarea
                 id="message"
+                name="Сообщение"
                 placeholder="Расскажите подробнее о проекте или вопросе..."
                 required
                 data-i18n-attrs="placeholder:placeholderMessage"

@@ -19,33 +19,29 @@ document.querySelector("[data-copy-email]")?.addEventListener("click", async (ev
   window.setTimeout(() => toast?.classList.remove("show"), 2500);
 });
 
-document.querySelectorAll("[data-topic-chip], .topic-chip").forEach((chip) => {
+// Topic chips: update hidden input when a chip is clicked
+document.querySelectorAll(".topic-chip").forEach((chip) => {
   chip.addEventListener("click", () => {
     document.querySelectorAll(".topic-chip").forEach((item) => item.classList.remove("active"));
     chip.classList.add("active");
+    const topicInput = document.getElementById("topic-value");
+    if (topicInput) {
+      topicInput.value = chip.textContent.trim();
+    }
   });
 });
 
-document.querySelector("[data-contact-form]")?.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const button = event.currentTarget.querySelector(".btn-submit");
-  const label = button?.querySelector("[data-submit-label]");
-
-  if (button) {
-    button.classList.add("sent");
-  }
-
-  if (label) {
-    label.textContent = getTranslation("sentMessage");
-  }
-
-  window.setTimeout(() => {
-    if (label) {
-      label.textContent = getTranslation("sendMessage");
+// Show success toast if redirected back after FormSubmit
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get("sent") === "true") {
+  window.addEventListener("DOMContentLoaded", () => {
+    const toast = document.getElementById("toast");
+    if (toast) {
+      toast.textContent = getTranslation("messageSent") || "Сообщение отправлено!";
+      toast.classList.add("show");
+      window.setTimeout(() => toast.classList.remove("show"), 4000);
     }
-
-    button?.classList.remove("sent");
-    event.currentTarget.reset();
-  }, 3000);
-});
+    // Clean URL
+    window.history.replaceState({}, document.title, window.location.pathname);
+  });
+}
