@@ -1,4 +1,4 @@
-const email = "your@email.com";
+const email = "egorvikturov@gmail.com";
 
 function getTranslation(key) {
   return window.egorI18n?.getTranslation?.(key) || key;
