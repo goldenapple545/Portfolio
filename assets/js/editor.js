@@ -358,6 +358,20 @@ function renderImageManagers() {
   });
 }
 
+function moveProject(index, direction) {
+  const newIndex = index + direction;
+  if (newIndex < 0 || newIndex >= projects.length) return;
+
+  syncCurrentForm();
+
+  const temp = projects[index];
+  projects[index] = projects[newIndex];
+  projects[newIndex] = temp;
+
+  renderList();
+  renderPreview();
+}
+
 function renderList() {
   listRoot.innerHTML = "";
 
@@ -371,9 +385,12 @@ function renderList() {
 
   projects.forEach((project, index) => {
     const localizedProject = getLocalizedProject(project);
+    const row = document.createElement("div");
+    row.className = `project-list-row ${project.id === selectedId ? "active" : ""}`.trim();
+
     const button = document.createElement("button");
     button.type = "button";
-    button.className = `project-list-item ${project.id === selectedId ? "active" : ""}`.trim();
+    button.className = "project-list-item";
     button.innerHTML = `<span>${index + 1}. ${escapeHtml(localizedProject.title || t("untitledProject"))}</span><small>${escapeHtml(
       localizedProject.category || t("uncategorizedProject"),
     )}</small>`;
@@ -383,7 +400,35 @@ function renderList() {
       renderList();
       renderPreview();
     });
-    listRoot.append(button);
+
+    const moveButtons = document.createElement("div");
+    moveButtons.className = "project-move-buttons";
+
+    const upBtn = document.createElement("button");
+    upBtn.type = "button";
+    upBtn.className = "project-move-btn";
+    upBtn.textContent = "↑";
+    upBtn.disabled = index === 0;
+    upBtn.title = index === 0 ? "" : (getLanguage() === "en" ? "Move up" : "Переместить вверх");
+    upBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      moveProject(index, -1);
+    });
+
+    const downBtn = document.createElement("button");
+    downBtn.type = "button";
+    downBtn.className = "project-move-btn";
+    downBtn.textContent = "↓";
+    downBtn.disabled = index === projects.length - 1;
+    downBtn.title = index === projects.length - 1 ? "" : (getLanguage() === "en" ? "Move down" : "Переместить вниз");
+    downBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      moveProject(index, 1);
+    });
+
+    moveButtons.append(upBtn, downBtn);
+    row.append(button, moveButtons);
+    listRoot.append(row);
   });
 }
 
